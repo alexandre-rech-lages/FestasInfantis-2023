@@ -1,0 +1,48 @@
+﻿--Selecionando todos os registros da tabela
+
+SELECT 
+	[ID], 
+	[NOME], 
+	[TELEFONE] 
+FROM 
+	[TBCLIENTE]
+
+--Selecionando todos apenas um registro da tabela
+SELECT 
+	[ID], 
+	[NOME], 
+	[TELEFONE] 
+FROM 
+	[TBCLIENTE]
+WHERE 
+	[ID] = 6
+
+--Inserindo registros na tabela
+INSERT INTO [TBCLIENTE] 
+	(
+		[NOME], 
+		[TELEFONE]
+	)
+	VALUES 
+	(
+		'Tiago Santini', 
+		'49 9 9929 2107'
+	);
+
+--selecionar o ultimo id gerado
+Select Scope_Identity();
+	
+
+--Excluindo apenas um registro da tabela
+
+DELETE FROM [TBCliente] 
+	WHERE [ID] = 4
+
+--Atualizando todos os registros da tabela
+
+UPDATE [TBCliente] 
+	SET 
+		[Nome] = 'Gabriel Rafaeli',
+		[Telefone] = '49 9 8888 4444'
+	WHERE 
+		[ID] = 6
