@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.Infra.Dados.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.ConsoleApp", "FestasInfantis.ConsoleApp\FestasInfantis.ConsoleApp.csproj", "{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FestasInfantis.Infra.Dados.Sql", "FestasInfantis.Infra.Dados.Sql\FestasInfantis.Infra.Dados.Sql.csproj", "{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{3D99AFDF-60A1-440B-8498-25694A548CC8} = {BFE092BD-E421-4C27-ABDA-0151ABF53F0E}
 		{CA13F360-5C9F-4814-A3F4-5A1E56032EF0} = {BFE092BD-E421-4C27-ABDA-0151ABF53F0E}
 		{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8} = {38B7D27C-EB7A-4BDF-8CFA-D82978E0D2A7}
+		{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10} = {BFE092BD-E421-4C27-ABDA-0151ABF53F0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46C50CA1-BBA7-42BA-A7C7-06A33BB2651C}

@@ -2,11 +2,14 @@ using FestasInfantis.Dominio.ModuloAluguel;
 using FestasInfantis.Dominio.ModuloCliente;
 using FestasInfantis.Dominio.ModuloItem;
 using FestasInfantis.Dominio.ModuloTema;
+
 using FestasInfantis.Infra.Dados.Arquivo.Compartilhado;
 using FestasInfantis.Infra.Dados.Arquivo.ModuleTema;
 using FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel;
-using FestasInfantis.Infra.Dados.Arquivo.ModuloCliente;
 using FestasInfantis.Infra.Dados.Arquivo.ModuloItem;
+
+using FestasInfantis.Infra.Dados.Sql.ModuloCliente;
+
 using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloItem;
@@ -20,9 +23,9 @@ namespace FestasInfantis.WinApp
 
         private static ContextoDados contextoDados = new ContextoDados(carregarDados: true);
 
-        private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
+        private IRepositorioCliente repositorioCliente = new RepositorioClienteSql();
 
-        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmArquivo(contextoDados);
+        private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);        
 
         private IRepositorioItem repositorioItem = new RepositorioItemEmArquivo(contextoDados);
 

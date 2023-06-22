@@ -12,6 +12,7 @@
     <ProjectReference Include="..\FestasInfantis.Dominio\FestasInfantis.Dominio.csproj" />
     <ProjectReference Include="..\FestasInfantis.Infra.Dados.Arquivo\FestasInfantis.Infra.Dados.Arquivo.csproj" />
     <ProjectReference Include="..\FestasInfantis.Infra.Dados.Memoria\FestasInfantis.Infra.Dados.Memoria.csproj" />
+    <ProjectReference Include="..\FestasInfantis.Infra.Dados.Sql\FestasInfantis.Infra.Dados.Sql.csproj" />
   </ItemGroup>
 
   <ItemGroup>
