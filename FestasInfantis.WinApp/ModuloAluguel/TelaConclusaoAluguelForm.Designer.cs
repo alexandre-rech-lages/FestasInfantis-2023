@@ -135,7 +135,6 @@
             pnlEndereco.Controls.Add(txtBairro);
             pnlEndereco.Controls.Add(lblBairro);
             pnlEndereco.Controls.Add(lblCidade);
-            pnlEndereco.Enabled = false;
             pnlEndereco.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             pnlEndereco.Location = new Point(22, 157);
             pnlEndereco.Name = "pnlEndereco";
@@ -146,9 +145,11 @@
             // 
             // txtNumero
             // 
+            txtNumero.Enabled = false;
             txtNumero.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtNumero.Location = new Point(351, 97);
             txtNumero.Name = "txtNumero";
+            txtNumero.ReadOnly = true;
             txtNumero.Size = new Size(100, 23);
             txtNumero.TabIndex = 7;
             // 
@@ -164,9 +165,11 @@
             // 
             // txtEstado
             // 
+            txtEstado.Enabled = false;
             txtEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtEstado.Location = new Point(351, 39);
             txtEstado.Name = "txtEstado";
+            txtEstado.ReadOnly = true;
             txtEstado.Size = new Size(100, 23);
             txtEstado.TabIndex = 4;
             // 
@@ -182,9 +185,11 @@
             // 
             // txtRua
             // 
+            txtRua.Enabled = false;
             txtRua.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtRua.Location = new Point(83, 68);
             txtRua.Name = "txtRua";
+            txtRua.ReadOnly = true;
             txtRua.Size = new Size(368, 23);
             txtRua.TabIndex = 5;
             // 
@@ -200,17 +205,21 @@
             // 
             // txtCidade
             // 
+            txtCidade.Enabled = false;
             txtCidade.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtCidade.Location = new Point(83, 39);
             txtCidade.Name = "txtCidade";
+            txtCidade.ReadOnly = true;
             txtCidade.Size = new Size(154, 23);
             txtCidade.TabIndex = 3;
             // 
             // txtBairro
             // 
+            txtBairro.Enabled = false;
             txtBairro.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtBairro.Location = new Point(83, 97);
             txtBairro.Name = "txtBairro";
+            txtBairro.ReadOnly = true;
             txtBairro.Size = new Size(184, 23);
             txtBairro.TabIndex = 6;
             // 
@@ -242,7 +251,6 @@
             groupBox1.Controls.Add(txtDataFesta);
             groupBox1.Controls.Add(lblData);
             groupBox1.Controls.Add(lblHorarioInicio);
-            groupBox1.Enabled = false;
             groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(25, 16);
             groupBox1.Name = "groupBox1";
@@ -253,10 +261,12 @@
             // 
             // txtHorarioInicio
             // 
+            txtHorarioInicio.Enabled = false;
             txtHorarioInicio.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtHorarioInicio.Location = new Point(117, 74);
             txtHorarioInicio.Mask = "00:00";
             txtHorarioInicio.Name = "txtHorarioInicio";
+            txtHorarioInicio.ReadOnly = true;
             txtHorarioInicio.Size = new Size(56, 23);
             txtHorarioInicio.TabIndex = 10;
             txtHorarioInicio.Text = "1300";
@@ -264,10 +274,12 @@
             // 
             // txtHorarioTermino
             // 
+            txtHorarioTermino.Enabled = false;
             txtHorarioTermino.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtHorarioTermino.Location = new Point(377, 74);
             txtHorarioTermino.Mask = "00:00";
             txtHorarioTermino.Name = "txtHorarioTermino";
+            txtHorarioTermino.ReadOnly = true;
             txtHorarioTermino.Size = new Size(56, 23);
             txtHorarioTermino.TabIndex = 9;
             txtHorarioTermino.Text = "1900";
@@ -285,6 +297,7 @@
             // 
             // txtDataFesta
             // 
+            txtDataFesta.Enabled = false;
             txtDataFesta.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtDataFesta.Format = DateTimePickerFormat.Short;
             txtDataFesta.Location = new Point(117, 34);
@@ -331,7 +344,6 @@
             pnlCliente.Controls.Add(txtPorcentagemDesconto);
             pnlCliente.Controls.Add(label5);
             pnlCliente.Controls.Add(lblNomeCliente);
-            pnlCliente.Enabled = false;
             pnlCliente.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             pnlCliente.Location = new Point(22, 25);
             pnlCliente.Name = "pnlCliente";
@@ -343,6 +355,7 @@
             // cmbClientes
             // 
             cmbClientes.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbClientes.Enabled = false;
             cmbClientes.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cmbClientes.FormattingEnabled = true;
             cmbClientes.Location = new Point(66, 37);
@@ -388,7 +401,6 @@
             pnlTema.Controls.Add(txtValorTema);
             pnlTema.Controls.Add(label3);
             pnlTema.Controls.Add(lblNomeTema);
-            pnlTema.Enabled = false;
             pnlTema.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             pnlTema.Location = new Point(22, 115);
             pnlTema.Name = "pnlTema";
@@ -400,6 +412,7 @@
             // cmbTemas
             // 
             cmbTemas.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTemas.Enabled = false;
             cmbTemas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cmbTemas.FormattingEnabled = true;
             cmbTemas.Location = new Point(66, 37);
@@ -448,7 +461,6 @@
             pnlDadosAluguel.Controls.Add(txtValorPendente);
             pnlDadosAluguel.Controls.Add(lblValorPendente);
             pnlDadosAluguel.Controls.Add(label4);
-            pnlDadosAluguel.Enabled = false;
             pnlDadosAluguel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             pnlDadosAluguel.Location = new Point(22, 205);
             pnlDadosAluguel.Name = "pnlDadosAluguel";
@@ -460,6 +472,7 @@
             // cmbEntrada
             // 
             cmbEntrada.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbEntrada.Enabled = false;
             cmbEntrada.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             cmbEntrada.FormattingEnabled = true;
             cmbEntrada.Location = new Point(351, 51);
@@ -560,7 +573,7 @@
             btnConcluir.Text = "Concluir";
             btnConcluir.UseVisualStyleBackColor = true;
             // 
-            // TelaConclusaoAluguel
+            // TelaConclusaoAluguelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -570,7 +583,7 @@
             Controls.Add(tabControl1);
             Controls.Add(txtId);
             Controls.Add(lblId);
-            Name = "TelaConclusaoAluguel";
+            Name = "TelaConclusaoAluguelForm";
             Text = "Conclusão de Aluguéis";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

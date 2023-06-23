@@ -7,6 +7,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         public TelaFiltroAluguelForm()
         {
             InitializeComponent();
+
+            this.ConfigurarDialog();
         }
 
         public StatusAluguelEnum ObterFiltroAluguel()

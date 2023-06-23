@@ -10,12 +10,6 @@
         {
             
         }
-        public Item(int id, string descricao, decimal valor)
-        {
-            this.id = id;
-            this.descricao = descricao;
-            this.valor = valor;
-        }
 
         public Item(string descricao, decimal valor)
         {

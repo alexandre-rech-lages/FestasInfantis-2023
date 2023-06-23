@@ -37,7 +37,7 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 new DataGridViewTextBoxColumn()
                 {
                     Name = "quantidadealugueis",
-                    HeaderText = "Quantidade de Aluguéis"
+                    HeaderText = "Aluguéis Concluídos"
                 },
             };
 

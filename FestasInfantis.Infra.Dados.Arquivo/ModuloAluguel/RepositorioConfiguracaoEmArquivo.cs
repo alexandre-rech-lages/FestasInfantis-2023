@@ -60,7 +60,5 @@ namespace FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel
 
             return opcoes;
         }
-
-
     }
 }

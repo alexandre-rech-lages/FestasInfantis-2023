@@ -141,7 +141,6 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             return cliente;
         }
-
       
         public List<Cliente> SelecionarTodos()
         {
@@ -171,38 +170,6 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
             return clientes;
         }
 
-        public List<Cliente> SelecionarTodosOutraOpcao()
-        {
-            //obter a conexão com o banco e abrir ela
-            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
-            conexaoComBanco.Open();
-
-            //cria um comando e relaciona com a conexão aberta
-            SqlCommand comandoSelecionarTodos = conexaoComBanco.CreateCommand();
-            comandoSelecionarTodos.CommandText = sqlSelecionarTodosClientes;
-
-            //executa o comando
-
-            SqlDataAdapter adapter = new SqlDataAdapter(comandoSelecionarTodos);
-
-            DataTable clientesDataTable = new DataTable();
-
-            adapter.Fill(clientesDataTable);
-
-            List<Cliente> clientes = new List<Cliente>();
-
-            //while (leitorClientes.Read())
-            //{
-            //    Cliente cliente = ConverterParaCliente(leitorClientes);
-
-            //    clientes.Add(cliente);
-            //}
-
-            //encerra a conexão
-            conexaoComBanco.Close();
-
-            return clientes;
-        }
 
         private static Cliente ConverterParaCliente(SqlDataReader leitorClientes)
         {

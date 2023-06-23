@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            rdbTodos = new RadioButton();
-            rdbAlugueisPendentes = new RadioButton();
             rdbAlugueisConcluidos = new RadioButton();
+            rdbAlugueisPendentes = new RadioButton();
+            rdbTodos = new RadioButton();
             btnCancelar = new Button();
             btnGravar = new Button();
             groupBox1.SuspendLayout();
@@ -50,38 +50,41 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Escolha o Filtro:";
             // 
-            // rdbTodos
+            // rdbAlugueisConcluidos
             // 
-            rdbTodos.AutoSize = true;
-            rdbTodos.Location = new Point(16, 37);
-            rdbTodos.Name = "rdbTodos";
-            rdbTodos.Size = new Size(152, 25);
-            rdbTodos.TabIndex = 0;
-            rdbTodos.TabStop = true;
-            rdbTodos.Text = "Todos os Aluguéis";
-            rdbTodos.UseVisualStyleBackColor = true;
+            rdbAlugueisConcluidos.AutoSize = true;
+            rdbAlugueisConcluidos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            rdbAlugueisConcluidos.Location = new Point(16, 97);
+            rdbAlugueisConcluidos.Name = "rdbAlugueisConcluidos";
+            rdbAlugueisConcluidos.Size = new Size(134, 19);
+            rdbAlugueisConcluidos.TabIndex = 2;
+            rdbAlugueisConcluidos.TabStop = true;
+            rdbAlugueisConcluidos.Text = "Aluguéis Concluídos";
+            rdbAlugueisConcluidos.UseVisualStyleBackColor = true;
             // 
             // rdbAlugueisPendentes
             // 
             rdbAlugueisPendentes.AutoSize = true;
+            rdbAlugueisPendentes.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             rdbAlugueisPendentes.Location = new Point(16, 67);
             rdbAlugueisPendentes.Name = "rdbAlugueisPendentes";
-            rdbAlugueisPendentes.Size = new Size(163, 25);
+            rdbAlugueisPendentes.Size = new Size(129, 19);
             rdbAlugueisPendentes.TabIndex = 1;
             rdbAlugueisPendentes.TabStop = true;
             rdbAlugueisPendentes.Text = "Aluguéis Pendentes";
             rdbAlugueisPendentes.UseVisualStyleBackColor = true;
             // 
-            // rdbAlugueisConcluidos
+            // rdbTodos
             // 
-            rdbAlugueisConcluidos.AutoSize = true;
-            rdbAlugueisConcluidos.Location = new Point(16, 97);
-            rdbAlugueisConcluidos.Name = "rdbAlugueisConcluidos";
-            rdbAlugueisConcluidos.Size = new Size(169, 25);
-            rdbAlugueisConcluidos.TabIndex = 2;
-            rdbAlugueisConcluidos.TabStop = true;
-            rdbAlugueisConcluidos.Text = "Aluguéis Concluídos";
-            rdbAlugueisConcluidos.UseVisualStyleBackColor = true;
+            rdbTodos.AutoSize = true;
+            rdbTodos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            rdbTodos.Location = new Point(16, 37);
+            rdbTodos.Name = "rdbTodos";
+            rdbTodos.Size = new Size(120, 19);
+            rdbTodos.TabIndex = 0;
+            rdbTodos.TabStop = true;
+            rdbTodos.Text = "Todos os Aluguéis";
+            rdbTodos.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
             // 

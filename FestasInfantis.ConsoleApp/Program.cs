@@ -8,10 +8,6 @@ namespace FestasInfantis.ConsoleApp
     {
         static void Main(string[] args)
         {
-            RepositorioClienteSql repositorioCliente = new RepositorioClienteSql();
-
-            List<Cliente> teste = repositorioCliente.SelecionarTodosOutraOpcao();
-
             //Cliente novoCliente = ObterCliente();
 
             //Inserir(novoCliente);

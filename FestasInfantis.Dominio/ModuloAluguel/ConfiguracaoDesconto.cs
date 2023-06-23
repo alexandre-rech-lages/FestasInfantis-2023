@@ -8,8 +8,8 @@
 
         public ConfiguracaoDesconto()
         {
-            PorcentagemDesconto = 1.5m;
-            PorcentagemMaxima = 20;
+            PorcentagemDesconto = 1m;
+            PorcentagemMaxima = 15;
         }
 
         public ConfiguracaoDesconto(decimal porcentagemPorDesconto, decimal porcentagemMaxima)

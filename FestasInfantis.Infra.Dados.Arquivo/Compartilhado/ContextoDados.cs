@@ -7,7 +7,7 @@ using FestasInfantis.Dominio.ModuloCliente;
 
 namespace FestasInfantis.Infra.Dados.Arquivo.Compartilhado
 {
-    public class ContextoDados //container
+    public class ContextoDados
     {
         private const string NOME_ARQUIVO = "Compartilhado\\FestasInfantis.json";
 

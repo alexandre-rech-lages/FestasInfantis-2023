@@ -1,4 +1,5 @@
-﻿using FestasInfantis.Dominio.ModuloCliente;
+﻿using FestasInfantis.Dominio.ModuloAluguel;
+using FestasInfantis.Dominio.ModuloCliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace FestasInfantis.WinApp.ModuloCliente
     public class ControladorCliente : ControladorBase
     {
         private TabelaClienteControl tabelaCliente;
-        private readonly IRepositorioCliente repositorioCliente;
+        private IRepositorioCliente repositorioCliente;
+        private IRepositorioAluguel repositorioAluguel;
 
-        public ControladorCliente(IRepositorioCliente repositorioCliente)
+        public ControladorCliente(IRepositorioCliente repositorioCliente, IRepositorioAluguel repositorioAluguel)
         {
             this.repositorioCliente = repositorioCliente;
+            this.repositorioAluguel = repositorioAluguel;
         }
 
         public override string ToolTipInserir { get { return "Inserir novo Cliente"; } }
@@ -89,18 +92,11 @@ namespace FestasInfantis.WinApp.ModuloCliente
             CarregarClientes();
         }
 
-        private Cliente ObterClienteSelecionado()
-        {
-            int id = tabelaCliente.ObterIdSelecionado();
-
-            return repositorioCliente.SelecionarPorId(id);
-        }
-
         public override void Excluir()
         {
-            Cliente Cliente = ObterClienteSelecionado();
+            Cliente cliente = ObterClienteSelecionado();
 
-            if (Cliente == null)
+            if (cliente == null)
             {
                 MessageBox.Show($"Selecione um cliente primeiro!",
                     "Exclusão de Clientes",
@@ -110,14 +106,35 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 return;
             }
 
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o cliente {Cliente.nome}?", "Exclusão de Clientes",
+            bool podeExcluir = repositorioAluguel.VerificarAlugueisAbertosCliente(cliente);
+
+            if (!podeExcluir)
+            {
+                MessageBox.Show($"Não é possível excluir um cliente com aluguéis em aberto.",
+                    "Exclusão de Clientes",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o cliente {cliente.nome}?", "Exclusão de Clientes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repositorioCliente.Excluir(Cliente);
+                repositorioCliente.Excluir(cliente);
             }
+
             CarregarClientes();
+        }
+
+        private Cliente ObterClienteSelecionado()
+        {
+            int id = tabelaCliente.ObterIdSelecionado();
+
+            return repositorioCliente.SelecionarPorId(id);
         }
 
         private void CarregarClientes()

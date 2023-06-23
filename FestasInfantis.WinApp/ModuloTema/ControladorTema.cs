@@ -1,4 +1,6 @@
-﻿using FestasInfantis.Dominio.ModuloItem;
+﻿using FestasInfantis.Dominio.ModuloAluguel;
+using FestasInfantis.Dominio.ModuloCliente;
+using FestasInfantis.Dominio.ModuloItem;
 using FestasInfantis.Dominio.ModuloTema;
 
 namespace FestasInfantis.WinApp.ModuloTema
@@ -6,13 +8,19 @@ namespace FestasInfantis.WinApp.ModuloTema
     public class ControladorTema : ControladorBase
     {
         private TabelaTemaControl tabelaTema;
-        private readonly IRepositorioTema repositorioTema;
-        private readonly IRepositorioItem repositorioItem;
+        private  IRepositorioTema repositorioTema;
+        private  IRepositorioItem repositorioItem;
+        private  IRepositorioAluguel repositorioAluguel;
 
-        public ControladorTema(IRepositorioTema repositorioTema, IRepositorioItem repositorioItem)
+        public ControladorTema(
+            IRepositorioTema repositorioTema, 
+            IRepositorioItem repositorioItem,
+            IRepositorioAluguel repositorioAluguel
+        )
         {
             this.repositorioTema = repositorioTema;
             this.repositorioItem = repositorioItem;
+            this.repositorioAluguel = repositorioAluguel;
         }
 
         public override string ToolTipInserir { get { return "Inserir novo Tema"; } }
@@ -71,11 +79,22 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         public override void Excluir()
         {
-            Tema Tema = ObterTemaSelecionado();
+            Tema tema = ObterTemaSelecionado();
 
-            if (Tema == null)
+            if (tema == null)
             {
                 MessageBox.Show($"Selecione um tema primeiro!",
+                    "Exclusão de Temas",
+                    MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            bool podeExcluir = repositorioAluguel.VerificarTemasIndisponiveis(tema);
+
+            if (!podeExcluir)
+            {
+                MessageBox.Show($"Não é possível excluir um tema utilizado em um aluguel em aberto.",
                     "Exclusão de Temas",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
@@ -83,12 +102,12 @@ namespace FestasInfantis.WinApp.ModuloTema
                 return;
             }
 
-            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Tema {Tema.nome}?", "Exclusão de Temas",
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Tema {tema.nome}?", "Exclusão de Temas",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repositorioTema.Excluir(Tema);
+                repositorioTema.Excluir(tema);
             }
             CarregarTemas();
         }

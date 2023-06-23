@@ -11,6 +11,8 @@ namespace FestasInfantis.WinApp.ModuloTema
         {
             InitializeComponent();
 
+            this.ConfigurarDialog();
+
             this.itensDisponiveis = itensDisponiveis;
 
             ConfigurarColunas();
@@ -31,7 +33,7 @@ namespace FestasInfantis.WinApp.ModuloTema
             {
                 int idItem = Convert.ToInt32(linha.Cells[0].Value);
 
-                Item item = itensDisponiveis.Find(x => x.id == idItem);
+                Item item = itensDisponiveis.Find(x => x.id == idItem)!;
 
                 tema.AdicionarItem(item);
             }

@@ -10,7 +10,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         private List<Tema> temas;
         private ConfiguracaoDesconto configuracaoDesconto;
 
-        public TelaAluguelForm(ConfiguracaoDesconto configuracaoDesconto, List<Cliente> repositorioCliente, List<Tema> repositorioTema)
+        public TelaAluguelForm(ConfiguracaoDesconto configuracaoDesconto, List<Cliente> clientes, List<Tema> temas)
         {
             InitializeComponent();
 
@@ -18,10 +18,15 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             this.configuracaoDesconto = configuracaoDesconto;
 
-            clientes = repositorioCliente;
-            temas = repositorioTema;
+            this.clientes = clientes;
+            this.temas = temas;
 
             ConfigurarComboBoxes();
+        }
+
+        public Cliente ObterClienteSelecionado()
+        {
+            return clientes.Find(c => c == cmbClientes.SelectedItem)!;
         }
 
         public Aluguel ObterAluguel()
@@ -35,9 +40,9 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             Festa festa = new Festa(ObterDadosEndereco(), data, horarioInicio, horarioTermino);
 
-            Cliente cliente = (Cliente)cmbClientes.SelectedItem;
+            Cliente cliente = clientes.Find(c => c == cmbClientes.SelectedItem)!;
 
-            Tema tema = (Tema)cmbTemas.SelectedItem;
+            Tema tema = temas.Find(t => t == cmbTemas.SelectedItem)!;
 
             decimal porcentagemEntrada = Convert.ToDecimal(cmbEntrada.SelectedItem);
 
@@ -124,7 +129,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarPorcentagemDesconto(object sender, EventArgs e)
         {
-            Cliente clienteSelecionado = (Cliente)cmbClientes.SelectedItem;
+            Cliente clienteSelecionado = clientes.Find(c => c == cmbClientes.SelectedItem);
 
             decimal porcentagemDesconto = clienteSelecionado.CalcularDesconto(configuracaoDesconto);
 
@@ -138,7 +143,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarValorTotal(object sender, EventArgs e)
         {
-            Tema temaSelecionado = (Tema)cmbTemas.SelectedItem;
+            Tema temaSelecionado = temas.Find(t => t == cmbTemas.SelectedItem);
 
             decimal valorTotal = temaSelecionado.CalcularValor();
 
@@ -154,7 +159,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarPorcentagemEntrada(object sender, EventArgs e)
         {
-            Tema temaSelecionado = (Tema)cmbTemas.SelectedItem;
+            Tema temaSelecionado = temas.Find(t => t == cmbTemas.SelectedItem);
 
             if (temaSelecionado != null)
                 AtualizarTabelaValores();

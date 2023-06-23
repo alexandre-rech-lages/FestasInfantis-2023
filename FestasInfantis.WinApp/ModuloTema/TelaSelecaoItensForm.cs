@@ -12,6 +12,8 @@ namespace FestasInfantis.WinApp.ModuloTema
         {
             InitializeComponent();
 
+            this.ConfigurarDialog();
+
             this.itensDisponiveis = itensDisponiveis;
 
             ConfigurarTela(tema);

@@ -34,6 +34,7 @@
             // 
             // listItensTema
             // 
+            listItensTema.CheckOnClick = true;
             listItensTema.FormattingEnabled = true;
             listItensTema.Location = new Point(0, 0);
             listItensTema.Name = "listItensTema";

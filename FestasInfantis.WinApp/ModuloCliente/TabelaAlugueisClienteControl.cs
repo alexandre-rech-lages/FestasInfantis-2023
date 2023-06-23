@@ -43,6 +43,11 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 {
                     Name = "valor",
                     HeaderText = "Valor"
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    Name = "pagamento",
+                    HeaderText = "Data de Pagamento"
                 }
             };
 
@@ -55,7 +60,14 @@ namespace FestasInfantis.WinApp.ModuloCliente
 
             foreach (Aluguel aluguel in alugueis)
             {
-                gridAlugueis.Rows.Add(aluguel.id, aluguel.Tema, aluguel.Tema.CalcularValor());
+                string statusPagamento = aluguel.DataPagamento == null ? "Não concluído" : aluguel.DataPagamento.Value.ToShortDateString();
+
+                gridAlugueis.Rows.Add(
+                    aluguel.id,
+                    aluguel.Tema,
+                    aluguel.Tema.CalcularValor(),
+                    statusPagamento
+                ); ;
             }
         }
 

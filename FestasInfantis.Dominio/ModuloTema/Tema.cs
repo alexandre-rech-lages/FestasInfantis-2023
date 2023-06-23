@@ -13,30 +13,17 @@ namespace FestasInfantis.Dominio.ModuloTema
         {            
         }
 
+        public Tema(string descricao)
+        {
+            nome = descricao;
+        }
+
         public void AdicionarItem(Item item)
         {
             if (Itens == null)
                 Itens = new List<Item>();
 
             Itens.Add(item);
-        }
-
-        public Tema(int id, string descricao, List<Item> itens)
-        {
-            this.id = id;
-            nome = descricao;
-            Itens = itens;
-        }
-
-        public Tema(string descricao)
-        {
-            nome = descricao;
-        }
-
-        public Tema(string descricao, List<Item> itens)
-        {
-            nome = descricao;
-            Itens = itens;
         }
 
         public decimal CalcularValor()

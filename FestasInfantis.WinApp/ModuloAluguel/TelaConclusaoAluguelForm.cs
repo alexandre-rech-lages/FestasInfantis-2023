@@ -6,87 +6,50 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 {
     public partial class TelaConclusaoAluguelForm : Form
     {
+        private Aluguel aluguelSelecionado;
         private ConfiguracaoDesconto configuracaoDesconto;
 
-        public TelaConclusaoAluguelForm(Aluguel aluguel, ConfiguracaoDesconto configuracaoDesconto)
+        public TelaConclusaoAluguelForm(Aluguel aluguelSelecionado, ConfiguracaoDesconto configuracaoDesconto)
         {
             InitializeComponent();
 
             this.ConfigurarDialog();
+            this.aluguelSelecionado = aluguelSelecionado;
             this.configuracaoDesconto = configuracaoDesconto;
 
-            ConfigurarComboBoxes(aluguel);
-            ConfigurarTela(aluguel);
+            ConfigurarComboBoxes();
+            ConfigurarTela();
         }
 
-        public Aluguel ObterAluguel()
+        private void ConfigurarTela()
         {
-            int id = Convert.ToInt32(txtId.Text);
+            txtId.Text = aluguelSelecionado.id.ToString();
 
-            DateTime data = txtDataFesta.Value;
+            txtDataFesta.Text = aluguelSelecionado.Festa.Data.ToString();
 
-            TimeSpan horarioInicio = TimeSpan.Parse(txtHorarioInicio.Text);
-            TimeSpan horarioTermino = TimeSpan.Parse(txtHorarioTermino.Text);
+            txtHorarioInicio.Text = aluguelSelecionado.Festa.HorarioInicio.ToString();
+            txtHorarioTermino.Text = aluguelSelecionado.Festa.HorarioTermino.ToString();
 
-            Festa festa = new Festa(ObterDadosEndereco(), data, horarioInicio, horarioTermino);
+            txtCidade.Text = aluguelSelecionado.Festa.Endereco.Cidade;
+            txtEstado.Text = aluguelSelecionado.Festa.Endereco.Estado;
+            txtRua.Text = aluguelSelecionado.Festa.Endereco.Rua;
+            txtBairro.Text = aluguelSelecionado.Festa.Endereco.Bairro;
+            txtNumero.Text = aluguelSelecionado.Festa.Endereco.Numero;
 
-            Cliente cliente = (Cliente)cmbClientes.SelectedItem;
+            cmbClientes.SelectedItem = aluguelSelecionado.Cliente;
 
-            Tema tema = (Tema)cmbTemas.SelectedItem;
+            cmbTemas.SelectedItem = aluguelSelecionado.Tema;
 
-            decimal porcentagemEntrada = Convert.ToDecimal(cmbEntrada.SelectedItem);
-
-            decimal porcentagemDesconto = Convert.ToDecimal(txtPorcentagemDesconto.Text);
-
-            Aluguel aluguel = new Aluguel(cliente, festa, tema, porcentagemEntrada, porcentagemDesconto);
-
-            if (id > 0)
-                aluguel.id = id;
-
-            return aluguel;
+            cmbEntrada.SelectedItem = aluguelSelecionado.PorcentagemSinal;
         }
 
-        private void ConfigurarTela(Aluguel aluguel)
-        {
-            txtId.Text = aluguel.id.ToString();
-
-            txtDataFesta.Text = aluguel.Festa.Data.ToString();
-
-            txtHorarioInicio.Text = aluguel.Festa.HorarioInicio.ToString();
-            txtHorarioTermino.Text = aluguel.Festa.HorarioTermino.ToString();
-
-            txtCidade.Text = aluguel.Festa.Endereco.Cidade;
-            txtEstado.Text = aluguel.Festa.Endereco.Estado;
-            txtRua.Text = aluguel.Festa.Endereco.Rua;
-            txtBairro.Text = aluguel.Festa.Endereco.Bairro;
-            txtNumero.Text = aluguel.Festa.Endereco.Numero;
-
-            cmbClientes.SelectedItem = aluguel.Cliente;
-
-            cmbTemas.SelectedItem = aluguel.Tema;
-
-            cmbEntrada.SelectedItem = aluguel.PorcentagemSinal;
-        }
-
-        private Endereco ObterDadosEndereco()
-        {
-            string cidade = txtCidade.Text;
-            string estado = txtEstado.Text;
-            string rua = txtRua.Text;
-            string bairro = txtBairro.Text;
-            string numero = txtNumero.Text;
-
-            return new Endereco(rua, bairro, cidade, estado, numero);
-        }
-
-
-        private void ConfigurarComboBoxes(Aluguel aluguel)
+        private void ConfigurarComboBoxes()
         {
             cmbClientes.Items.Clear();
-            cmbClientes.Items.Add(aluguel.Cliente);
+            cmbClientes.Items.Add(aluguelSelecionado.Cliente);
 
             cmbTemas.Items.Clear();
-            cmbTemas.Items.Add(aluguel.Tema);
+            cmbTemas.Items.Add(aluguelSelecionado.Tema);
 
             cmbEntrada.Items.Add(40m);
             cmbEntrada.Items.Add(50m);
@@ -95,14 +58,14 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarTabelaValores()
         {
-            txtValorPendente.Text = ObterAluguel().CalcularValorPendente().ToString();
-            txtValorSinal.Text = ObterAluguel().CalcularValorSinal().ToString();
-            txtValorDesconto.Text = ObterAluguel().CalcularValorDesconto().ToString();
+            txtValorPendente.Text = aluguelSelecionado.CalcularValorPendente().ToString();
+            txtValorSinal.Text = aluguelSelecionado.CalcularValorSinal().ToString();
+            txtValorDesconto.Text = aluguelSelecionado.CalcularValorDesconto().ToString();
         }
 
         private void AtualizarPorcentagemDesconto(object sender, EventArgs e)
         {
-            Cliente clienteSelecionado = (Cliente)cmbClientes.SelectedItem;
+            Cliente clienteSelecionado = aluguelSelecionado.Cliente;
 
             decimal porcentagemDesconto = clienteSelecionado.CalcularDesconto(configuracaoDesconto);
 
@@ -111,7 +74,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarValorTotal(object sender, EventArgs e)
         {
-            Tema temaSelecionado = (Tema)cmbTemas.SelectedItem;
+            Tema temaSelecionado = aluguelSelecionado.Tema;
 
             decimal valorTotal = temaSelecionado.CalcularValor();
 
@@ -122,7 +85,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarPorcentagemEntrada(object sender, EventArgs e)
         {
-            Tema temaSelecionado = (Tema)cmbTemas.SelectedItem;
+            Tema temaSelecionado = aluguelSelecionado.Tema;
 
             if (temaSelecionado != null)
                 AtualizarTabelaValores();

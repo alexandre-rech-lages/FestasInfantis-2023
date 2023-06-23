@@ -3,7 +3,7 @@
     public abstract class RepositorioEmArquivoBase<T> where T : EntidadeBase<T>
     {
         protected ContextoDados contextoDados;
-        private int contador;
+        protected int contador;
 
         public RepositorioEmArquivoBase(ContextoDados contexto)
         {
@@ -14,7 +14,7 @@
 
         protected abstract List<T> ObterRegistros();
 
-        public void Inserir(T novoRegistro)
+        public virtual void Inserir(T novoRegistro)
         {
             List<T> registros = ObterRegistros();
 
@@ -25,7 +25,7 @@
             contextoDados.GravarEmArquivoJson();
         }
 
-        public void Editar(int id, T registroAtualizado)
+        public virtual void Editar(int id, T registroAtualizado)
         {
             T registroSelecionado = SelecionarPorId(id);
 

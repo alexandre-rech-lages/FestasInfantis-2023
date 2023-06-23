@@ -2,14 +2,11 @@ using FestasInfantis.Dominio.ModuloAluguel;
 using FestasInfantis.Dominio.ModuloCliente;
 using FestasInfantis.Dominio.ModuloItem;
 using FestasInfantis.Dominio.ModuloTema;
-
 using FestasInfantis.Infra.Dados.Arquivo.Compartilhado;
 using FestasInfantis.Infra.Dados.Arquivo.ModuleTema;
 using FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel;
-using FestasInfantis.Infra.Dados.Arquivo.ModuloItem;
-
-using FestasInfantis.Infra.Dados.Sql.ModuloCliente;
-
+using FestasInfantis.Infra.Dados.Memoria.ModuloCliente;
+using FestasInfantis.Infra.Dados.Memoria.ModuloItem;
 using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloItem;
@@ -23,9 +20,9 @@ namespace FestasInfantis.WinApp
 
         private static ContextoDados contextoDados = new ContextoDados(carregarDados: true);
 
-        private IRepositorioCliente repositorioCliente = new RepositorioClienteSql();
+        private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
 
-        private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);        
+        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmArquivo(contextoDados);
 
         private IRepositorioItem repositorioItem = new RepositorioItemEmArquivo(contextoDados);
 
@@ -60,7 +57,7 @@ namespace FestasInfantis.WinApp
 
         private void clientesMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorCliente(repositorioCliente);
+            controlador = new ControladorCliente(repositorioCliente, repositorioAluguel);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -74,7 +71,7 @@ namespace FestasInfantis.WinApp
 
         private void temasMenuItem_Click(object sender, EventArgs e)
         {
-            controlador = new ControladorTema(repositorioTema, repositorioItem);
+            controlador = new ControladorTema(repositorioTema, repositorioItem, repositorioAluguel);
 
             ConfigurarTelaPrincipal(controlador);
         }
@@ -181,76 +178,6 @@ namespace FestasInfantis.WinApp
         private void btnConfigurarDescontos_Click(object sender, EventArgs e)
         {
             (controlador as ControladorAluguel)!.ConfigurarDescontos();
-        }
-
-        private static List<Item> ConfigurarItens()
-        {
-            List<Item> itens = new List<Item>();
-
-            Item item = new Item(1, "Mesa Grande x50", 150m);
-            Item item2 = new Item(2, "Chapéu do Mickey x25", 50m);
-
-            itens.Add(item);
-            itens.Add(item2);
-
-            return itens;
-        }
-
-        private static List<Tema> ConfigurarTemas()
-        {
-            List<Item> itens = new List<Item>();
-
-            Item item = new Item(1, "Mesa Grande x50", 150m);
-            Item item2 = new Item(2, "Chapéu do Mickey x25", 50m);
-
-            itens.Add(item);
-            itens.Add(item2);
-
-            List<Tema> temas = new List<Tema>();
-
-            Tema tema = new Tema(1, "Festa de Aniversário", itens);
-
-            temas.Add(tema);
-
-            return temas;
-        }
-
-        private static List<Cliente> ConfigurarClientes()
-        {
-            List<Cliente> clientes = new List<Cliente>();
-
-            Cliente cliente = new Cliente(1, "Tiago Santini", "(49) 98505-6251");
-            Cliente cliente2 = new Cliente(2, "Alexandre Rech", "(49) 99225-8850");
-            clientes.Add(cliente);
-            clientes.Add(cliente2);
-
-            return clientes;
-        }
-
-        private static List<Aluguel> ConfigurarAlugueis()
-        {
-            List<Aluguel> alugueis = new List<Aluguel>();
-
-            Endereco endereco = new Endereco("Marechal Deodoro", "Centro", "Lages", "SC", "40");
-            Festa festa = new Festa(endereco, DateTime.Now, TimeSpan.Parse("1200"), TimeSpan.Parse("1800"));
-
-            Cliente cliente = new Cliente(1, "Tiago Santini", "(49) 98505-6251");
-
-            List<Item> itens = new List<Item>();
-
-            Item item = new Item(1, "Mesa Grande x50", 150m);
-            Item item2 = new Item(2, "Chapéu do Mickey x25", 50m);
-
-            itens.Add(item);
-            itens.Add(item2);
-
-            Tema tema = new Tema(1, "Festa de Aniversário", itens);
-
-            Aluguel aluguel = new Aluguel(1, cliente, festa, tema, 40, 0.0m);
-
-            alugueis.Add(aluguel);
-
-            return alugueis;
         }
     }
 }

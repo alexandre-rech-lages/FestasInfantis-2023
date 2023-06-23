@@ -11,23 +11,11 @@ namespace FestasInfantis.Dominio.ModuloAluguel
         public Tema Tema { get; set; }
         public decimal PorcentagemSinal { get; set; }
         public decimal PorcentagemDesconto { get; set; }
-        public bool Concluido { get; set; }
+        public DateTime? DataPagamento { get; set; }
+        public bool PagamentoConcluido { get; set; }
 
         public Aluguel()
-        {            
-        }
-
-        public Aluguel(int id, Cliente cliente, Festa festa, Tema tema, decimal porcentagemSinal, decimal porcentagemDesconto)
         {
-            this.id = id;
-            Cliente = cliente;
-            Festa = festa;
-            Tema = tema;
-            PorcentagemSinal = porcentagemSinal;
-            PorcentagemDesconto = porcentagemDesconto;
-            Concluido = false;
-
-            Cliente.AdicionarAluguel(this);
         }
 
         public Aluguel(Cliente cliente, Festa festa, Tema tema, decimal porcentagemSinal, decimal porcentagemDesconto)
@@ -37,9 +25,8 @@ namespace FestasInfantis.Dominio.ModuloAluguel
             Tema = tema;
             PorcentagemSinal = porcentagemSinal;
             PorcentagemDesconto = porcentagemDesconto;
-            Concluido = false;
-
-            Cliente.AdicionarAluguel(this);
+            PagamentoConcluido = false;
+            DataPagamento = null;
         }
 
         public decimal CalcularValorPendente()
@@ -59,7 +46,8 @@ namespace FestasInfantis.Dominio.ModuloAluguel
 
         public void Concluir()
         {
-            Concluido = true;
+            DataPagamento = DateTime.Now;
+            PagamentoConcluido = true;
         }
 
         public override void AtualizarInformacoes(Aluguel registroAtualizado)
@@ -69,7 +57,8 @@ namespace FestasInfantis.Dominio.ModuloAluguel
             Tema = registroAtualizado.Tema;
             PorcentagemDesconto = registroAtualizado.PorcentagemDesconto;
             PorcentagemSinal = registroAtualizado.PorcentagemSinal;
-            Concluido = registroAtualizado.Concluido;
+            DataPagamento = registroAtualizado.DataPagamento;
+            PagamentoConcluido = registroAtualizado.PagamentoConcluido;
         }
 
         public override string[] Validar()

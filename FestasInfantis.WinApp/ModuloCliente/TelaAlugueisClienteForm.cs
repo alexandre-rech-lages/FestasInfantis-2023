@@ -7,6 +7,8 @@ namespace FestasInfantis.WinApp.ModuloCliente
         public TelaAlugueisClienteForm()
         {
             InitializeComponent();
+
+            this.ConfigurarDialog();
         }
 
         public void ConfigurarTela(Cliente cliente)

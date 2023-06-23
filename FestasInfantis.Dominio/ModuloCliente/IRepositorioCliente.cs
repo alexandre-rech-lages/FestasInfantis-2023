@@ -1,4 +1,6 @@
-﻿namespace FestasInfantis.Dominio.ModuloCliente
+﻿using FestasInfantis.Dominio.ModuloAluguel;
+
+namespace FestasInfantis.Dominio.ModuloCliente
 {
     public interface IRepositorioCliente
     {
