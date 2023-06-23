@@ -1,4 +1,5 @@
 ﻿using FestasInfantis.Dominio.ModuloCliente;
+using FestasInfantis.Infra.Dados.Sql.ModuloAluguel;
 using FestasInfantis.Infra.Dados.Sql.ModuloCliente;
 using Microsoft.Data.SqlClient;
 
@@ -8,6 +9,10 @@ namespace FestasInfantis.ConsoleApp
     {
         static void Main(string[] args)
         {
+            RepositorioAluguelEmSql rep = new RepositorioAluguelEmSql();
+
+            rep.SelecionarTodos();  
+
             //Cliente novoCliente = ObterCliente();
 
             //Inserir(novoCliente);

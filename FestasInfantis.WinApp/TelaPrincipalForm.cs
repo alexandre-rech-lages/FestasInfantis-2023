@@ -23,7 +23,7 @@ namespace FestasInfantis.WinApp
 
         private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
 
-        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmSql();
+        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmArquivo(contextoDados);
 
         private IRepositorioItem repositorioItem = new RepositorioItemEmArquivo(contextoDados);
 

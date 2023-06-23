@@ -127,16 +127,16 @@ namespace FestasInfantis.WinApp.ModuloTema
                 return;
             }
 
-            TelaSelecaoItensForm telaItens = new TelaSelecaoItensForm(repositorioItem.SelecionarTodos(), tema);
+            //TelaSelecaoItensForm telaItens = new TelaSelecaoItensForm(repositorioItem.SelecionarTodos(), tema);
 
-            DialogResult resultado = telaItens.ShowDialog();
+            //DialogResult resultado = telaItens.ShowDialog();
 
-            if (resultado == DialogResult.OK)
-            {
-                tema.AtualizarItens(telaItens.ObterItensMarcados());
+            //if (resultado == DialogResult.OK)
+            //{
+            //    tema.AtualizarItens(telaItens.ObterItensMarcados());
 
-                repositorioTema.Editar(tema.id, tema);
-            }
+            //    repositorioTema.Editar(tema.id, tema);
+            //}
         }
 
         private Tema ObterTemaSelecionado()

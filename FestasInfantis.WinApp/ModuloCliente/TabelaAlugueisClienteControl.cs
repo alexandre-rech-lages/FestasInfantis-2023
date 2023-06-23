@@ -60,7 +60,8 @@ namespace FestasInfantis.WinApp.ModuloCliente
 
             foreach (Aluguel aluguel in alugueis)
             {
-                string statusPagamento = aluguel.DataPagamento == null ? "Não concluído" : aluguel.DataPagamento.Value.ToShortDateString();
+                string statusPagamento = aluguel.DataPagamento == null ? 
+                    "Não concluído" : aluguel.DataPagamento.Value.ToShortDateString();
 
                 gridAlugueis.Rows.Add(
                     aluguel.id,

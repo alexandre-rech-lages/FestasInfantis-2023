@@ -59,10 +59,12 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { cadastrosMenuItem, relatóriosToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Padding = new Padding(7, 3, 0, 3);
+            menuStrip1.Size = new Size(914, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -70,13 +72,13 @@
             // 
             cadastrosMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clientesMenuItem, temasMenuItem, alugueisToolStripMenuItem });
             cadastrosMenuItem.Name = "cadastrosMenuItem";
-            cadastrosMenuItem.Size = new Size(71, 20);
+            cadastrosMenuItem.Size = new Size(88, 24);
             cadastrosMenuItem.Text = "Cadastros";
             // 
             // clientesMenuItem
             // 
             clientesMenuItem.Name = "clientesMenuItem";
-            clientesMenuItem.Size = new Size(120, 22);
+            clientesMenuItem.Size = new Size(149, 26);
             clientesMenuItem.Text = "Clientes";
             clientesMenuItem.Click += clientesMenuItem_Click;
             // 
@@ -84,52 +86,55 @@
             // 
             temasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { itensToolStripMenuItem });
             temasMenuItem.Name = "temasMenuItem";
-            temasMenuItem.Size = new Size(120, 22);
+            temasMenuItem.Size = new Size(149, 26);
             temasMenuItem.Text = "Temas";
             temasMenuItem.Click += temasMenuItem_Click;
             // 
             // itensToolStripMenuItem
             // 
             itensToolStripMenuItem.Name = "itensToolStripMenuItem";
-            itensToolStripMenuItem.Size = new Size(99, 22);
+            itensToolStripMenuItem.Size = new Size(123, 26);
             itensToolStripMenuItem.Text = "Itens";
             itensToolStripMenuItem.Click += itensToolStripMenuItem_Click;
             // 
             // alugueisToolStripMenuItem
             // 
             alugueisToolStripMenuItem.Name = "alugueisToolStripMenuItem";
-            alugueisToolStripMenuItem.Size = new Size(120, 22);
+            alugueisToolStripMenuItem.Size = new Size(149, 26);
             alugueisToolStripMenuItem.Text = "Aluguéis";
             alugueisToolStripMenuItem.Click += alugueisToolStripMenuItem_Click;
             // 
             // relatóriosToolStripMenuItem
             // 
             relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            relatóriosToolStripMenuItem.Size = new Size(71, 20);
+            relatóriosToolStripMenuItem.Size = new Size(90, 24);
             relatóriosToolStripMenuItem.Text = "Relatórios";
             // 
             // statusStrip1
             // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { labelRodape });
-            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Location = new Point(0, 574);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.Padding = new Padding(1, 0, 16, 0);
+            statusStrip1.Size = new Size(914, 26);
             statusStrip1.TabIndex = 1;
             statusStrip1.Text = "statusStrip1";
             // 
             // labelRodape
             // 
             labelRodape.Name = "labelRodape";
-            labelRodape.Size = new Size(52, 17);
+            labelRodape.Size = new Size(67, 20);
             labelRodape.Text = "[rodape]";
             // 
             // barraFerramentas
             // 
             barraFerramentas.Enabled = false;
+            barraFerramentas.ImageScalingSize = new Size(20, 20);
             barraFerramentas.Items.AddRange(new ToolStripItem[] { btnInserir, btnEditar, btnExcluir, toolStripSeparator2, btnFiltrar, toolStripSeparator3, btnAdicionarItens, toolStripSeparator1, btnVisualizarAlugueisCliente, btnConcluirAluguel, btnConfigurarDescontos, toolStripSeparator5, labelTipoCadastro });
-            barraFerramentas.Location = new Point(0, 24);
+            barraFerramentas.Location = new Point(0, 30);
             barraFerramentas.Name = "barraFerramentas";
-            barraFerramentas.Size = new Size(800, 45);
+            barraFerramentas.Size = new Size(914, 45);
             barraFerramentas.TabIndex = 2;
             barraFerramentas.Text = "toolStrip1";
             // 
@@ -244,31 +249,31 @@
             // labelTipoCadastro
             // 
             labelTipoCadastro.Name = "labelTipoCadastro";
-            labelTipoCadastro.Size = new Size(75, 42);
+            labelTipoCadastro.Size = new Size(95, 42);
             labelTipoCadastro.Text = "tipoCadastro";
             // 
             // panelRegistros
             // 
             panelRegistros.BorderStyle = BorderStyle.FixedSingle;
             panelRegistros.Dock = DockStyle.Fill;
-            panelRegistros.Location = new Point(0, 69);
+            panelRegistros.Location = new Point(0, 75);
+            panelRegistros.Margin = new Padding(3, 4, 3, 4);
             panelRegistros.Name = "panelRegistros";
-            panelRegistros.Size = new Size(800, 359);
+            panelRegistros.Size = new Size(914, 499);
             panelRegistros.TabIndex = 3;
             // 
             // TelaPrincipalForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(panelRegistros);
             Controls.Add(barraFerramentas);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = menuStrip1;
-            MaximizeBox = false;
-            MinimizeBox = false;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "TelaPrincipalForm";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;

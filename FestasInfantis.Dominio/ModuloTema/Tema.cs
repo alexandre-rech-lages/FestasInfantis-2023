@@ -9,13 +9,15 @@ namespace FestasInfantis.Dominio.ModuloTema
 
         public List<Item> Itens { get; set; }
 
-        public Tema()
-        {            
+        public Tema(int idTema, string nome)
+        {
+            this.id = idTema;   
+            this.nome = nome;
         }
 
-        public Tema(string descricao)
+        public Tema(string nome)
         {
-            nome = descricao;
+            nome = nome;
         }
 
         public void AdicionarItem(Item item)
