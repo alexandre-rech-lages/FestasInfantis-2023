@@ -39,12 +39,10 @@
             tabPage1 = new TabPage();
             txtValor = new TextBox();
             tabPage2 = new TabPage();
-            btnSelecionarItens = new Button();
-            gridItens = new DataGridView();
+            listItensTema = new CheckedListBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridItens).BeginInit();
             SuspendLayout();
             // 
             // btnGravar
@@ -117,10 +115,10 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(30, 27);
+            tabControl1.Location = new Point(12, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(426, 317);
+            tabControl1.Size = new Size(473, 317);
             tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -134,7 +132,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(418, 289);
+            tabPage1.Size = new Size(465, 289);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Dados Básicos";
             tabPage1.UseVisualStyleBackColor = true;
@@ -151,34 +149,24 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(btnSelecionarItens);
-            tabPage2.Controls.Add(gridItens);
+            tabPage2.Controls.Add(listItensTema);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(418, 289);
+            tabPage2.Size = new Size(465, 289);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Seleção de Itens";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnSelecionarItens
+            // listItensTema
             // 
-            btnSelecionarItens.Location = new Point(6, 6);
-            btnSelecionarItens.Name = "btnSelecionarItens";
-            btnSelecionarItens.Size = new Size(168, 37);
-            btnSelecionarItens.TabIndex = 1;
-            btnSelecionarItens.Text = "Adicionar e Remover Itens";
-            btnSelecionarItens.UseVisualStyleBackColor = true;
-            btnSelecionarItens.Click += btnSelecionarItens_Click;
-            // 
-            // gridItens
-            // 
-            gridItens.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridItens.Location = new Point(0, 49);
-            gridItens.Name = "gridItens";
-            gridItens.RowTemplate.Height = 25;
-            gridItens.Size = new Size(418, 240);
-            gridItens.TabIndex = 0;
+            listItensTema.CheckOnClick = true;
+            listItensTema.Dock = DockStyle.Fill;
+            listItensTema.FormattingEnabled = true;
+            listItensTema.Location = new Point(3, 3);
+            listItensTema.Name = "listItensTema";
+            listItensTema.Size = new Size(459, 283);
+            listItensTema.TabIndex = 1;
             // 
             // TelaTemaForm
             // 
@@ -198,7 +186,6 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gridItens).EndInit();
             ResumeLayout(false);
         }
 
@@ -214,8 +201,7 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private Button btnSelecionarItens;
-        private DataGridView gridItens;
         private TextBox txtValor;
+        private CheckedListBox listItensTema;
     }
 }

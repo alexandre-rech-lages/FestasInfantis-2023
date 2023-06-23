@@ -4,7 +4,7 @@
     public class Endereco
     {
         public Endereco()
-        {            
+        {
         }
         public Endereco(string rua, string bairro, string cidade, string estado, string numero)
         {
@@ -24,6 +24,28 @@
         public override string ToString()
         {
             return $"{Rua}, {Bairro}, {Numero}, {Cidade}, {Estado}";
+        }
+
+        public List<string> Validar()
+        {
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(Cidade))
+                erros.Add("O campo 'Cidade' é obrigatório!");
+
+            if (string.IsNullOrEmpty(Estado))
+                erros.Add("O campo 'Estado' é obrigatório!");
+
+            if (string.IsNullOrEmpty(Rua))
+                erros.Add("O campo 'Rua' é obrigatório!");
+
+            if (string.IsNullOrEmpty(Bairro))
+                erros.Add("O campo 'Bairro' é obrigatório!");
+
+            if (string.IsNullOrEmpty(Numero))
+                erros.Add("O campo 'Número' é obrigatório!");
+
+            return erros;
         }
     }
 }

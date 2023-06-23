@@ -9,7 +9,7 @@
         public TimeSpan HorarioTermino { get; set; }
 
         public Festa()
-        {            
+        {
         }
 
         public Festa(Endereco endereco, DateTime data, TimeSpan horarioInicio, TimeSpan horarioTermino)
@@ -30,20 +30,7 @@
             if (HorarioTermino < HorarioInicio)
                 erros.Add("O horário de término não pode ser antes do início!");
 
-            if (string.IsNullOrEmpty(Endereco.Cidade))
-                erros.Add("O campo 'Cidade' é obrigatório!");
-
-            if (string.IsNullOrEmpty(Endereco.Estado))
-                erros.Add("O campo 'Estado' é obrigatório!");
-
-            if (string.IsNullOrEmpty(Endereco.Rua))
-                erros.Add("O campo 'Rua' é obrigatório!");
-            
-            if (string.IsNullOrEmpty(Endereco.Bairro))
-                erros.Add("O campo 'Bairro' é obrigatório!");
-
-            if (string.IsNullOrEmpty(Endereco.Numero))
-                erros.Add("O campo 'Número' é obrigatório!");
+            erros.AddRange(Endereco.Validar());
 
             return erros.ToArray();
         }

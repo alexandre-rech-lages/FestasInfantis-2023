@@ -1,11 +1,4 @@
-﻿using FestasInfantis.Dominio.ModuloCliente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FestasInfantis.Dominio.ModuloItem
+﻿namespace FestasInfantis.Dominio.ModuloItem
 {
     public interface IRepositorioItem
     {

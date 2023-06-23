@@ -5,20 +5,13 @@ namespace FestasInfantis.WinApp.ModuloTema
 {
     public partial class TelaTemaForm : Form
     {
-        private List<Item> itensDisponiveis;
-
         public TelaTemaForm(List<Item> itensDisponiveis)
         {
             InitializeComponent();
 
             this.ConfigurarDialog();
 
-            this.itensDisponiveis = itensDisponiveis;
-
-            ConfigurarColunas();
-            gridItens.ConfigurarGridZebrado();
-            gridItens.ConfigurarGridSomenteLeitura();
-
+            CarregarItens(itensDisponiveis);
         }
 
         public Tema ObterTema()
@@ -29,12 +22,10 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             Tema tema = new Tema(nome);
 
-            foreach (DataGridViewRow linha in gridItens.Rows)
+            List<Item> itensMarcados = ObterItensMarcados();
+
+            foreach (Item item in itensMarcados)
             {
-                int idItem = Convert.ToInt32(linha.Cells[0].Value);
-
-                Item item = itensDisponiveis.Find(x => x.id == idItem)!;
-
                 tema.AdicionarItem(item);
             }
 
@@ -44,48 +35,15 @@ namespace FestasInfantis.WinApp.ModuloTema
             return tema;
         }
 
-        private void ConfigurarColunas()
+        public List<Item> ObterItensMarcados()
         {
-            DataGridViewColumn[] colunas = new DataGridViewColumn[]
-            {
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "id",
-                    HeaderText = "Id"
-                },
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "descricao",
-                    HeaderText = "Descrição"
-                },
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "valor",
-                    HeaderText = "Valor"
-                }
-            };
-
-            gridItens.Columns.AddRange(colunas);
+            return listItensTema.CheckedItems.Cast<Item>().ToList();
         }
 
-        public void AtualizarRegistros(List<Item> itens)
+        public List<Item> ObterItensDesmarcados()
         {
-            gridItens.Rows.Clear();
-
-            foreach (Item item in itens)
-            {
-                gridItens.Rows.Add(item.id, item.descricao, item.valor);
-            }
-        }
-
-        private void btnSelecionarItens_Click(object sender, EventArgs e)
-        {
-            TelaSelecaoItensForm telaItens = new TelaSelecaoItensForm(itensDisponiveis, ObterTema());
-
-            DialogResult resultado = telaItens.ShowDialog();
-
-            if (resultado == DialogResult.OK)
-                ConfigurarGridItens(telaItens.ObterItensMarcados());
+            return listItensTema.Items.Cast<Item>()
+                .Except(ObterItensMarcados()).ToList();
         }
 
         public void ConfigurarTela(Tema tema)
@@ -96,7 +54,17 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             txtValor.Text = tema.CalcularValor().ToString();
 
-            ConfigurarGridItens(tema.Itens);
+            int i = 0;
+
+            for (int j = 0; j < listItensTema.Items.Count; j++)
+            {
+                Item item = (Item)listItensTema.Items[j];
+
+                if (tema.Itens.Contains(item))
+                    listItensTema.SetItemChecked(i, true);
+
+                i++;
+            }
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -113,14 +81,14 @@ namespace FestasInfantis.WinApp.ModuloTema
             }
         }
 
-        private void ConfigurarGridItens(List<Item> itensSelecionados)
+        private void CarregarItens(List<Item> itensSelecionados)
         {
-            gridItens.Rows.Clear();
+            listItensTema.Items.Clear();
 
             foreach (Item item in itensSelecionados)
             {
-                gridItens.Rows.Add(item.id, item.descricao, item.valor);
-            }
+                listItensTema.Items.Add(item);
+            }            
         }
     }
 }

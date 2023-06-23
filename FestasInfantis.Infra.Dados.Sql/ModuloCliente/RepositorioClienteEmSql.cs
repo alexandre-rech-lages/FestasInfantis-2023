@@ -1,10 +1,9 @@
 ﻿using FestasInfantis.Dominio.ModuloCliente;
 using Microsoft.Data.SqlClient;
-using System.Data;
 
 namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 {
-    public class RepositorioClienteSql : IRepositorioCliente
+    public class RepositorioClienteEmSql : IRepositorioCliente
     {
         private const string enderecoBanco = 
             @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=FestasInfantisDb;Integrated Security=True";

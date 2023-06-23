@@ -35,7 +35,8 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         public override void Inserir()
         {
-            TelaTemaForm telaTema = new TelaTemaForm(repositorioItem.SelecionarTodos());
+            List<Item> itens = repositorioItem.SelecionarTodos();
+            TelaTemaForm telaTema = new TelaTemaForm(itens);
 
             DialogResult opcaoEscolhida = telaTema.ShowDialog();
 
