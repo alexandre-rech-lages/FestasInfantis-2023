@@ -28,7 +28,7 @@ namespace FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel
             base.Editar(registroAtualizado.id, registroAtualizado);
         }
 
-        public List<Aluguel> SelecionarConcluidas()
+        public List<Aluguel> SelecionarConcluidos()
         {
             return ObterRegistros()
                 .Where(x => x.PagamentoConcluido).ToList();

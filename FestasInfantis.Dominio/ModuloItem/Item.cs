@@ -17,6 +17,13 @@
             this.valor = valor;
         }
 
+        public Item(int id, string descricao, decimal valor)
+        {
+            this.id = id;
+            this.descricao = descricao;
+            this.valor = valor;
+        }
+
         public override void AtualizarInformacoes(Item registroAtualizado)
         {
             this.id = registroAtualizado.id;

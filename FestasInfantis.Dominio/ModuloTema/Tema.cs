@@ -13,11 +13,17 @@ namespace FestasInfantis.Dominio.ModuloTema
         {
             this.id = idTema;   
             this.nome = nome;
+            this.Itens = new List<Item>();
+        }
+
+        public Tema()
+        {            
         }
 
         public Tema(string nome)
         {
-            nome = nome;
+            this.nome = nome;
+            this.Itens = new List<Item>();
         }
 
         public void AdicionarItem(Item item)
@@ -30,7 +36,10 @@ namespace FestasInfantis.Dominio.ModuloTema
 
         public decimal CalcularValor()
         {
-            return Itens.Aggregate(0m, (soma, item) => soma + item.valor);
+            if (Itens != null)
+                return Itens.Aggregate(0m, (soma, item) => soma + item.valor);
+
+            return 0;
         }
 
         public void AtualizarItens(List<Item> itens)

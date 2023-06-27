@@ -1,4 +1,7 @@
-﻿using FestasInfantis.Dominio.ModuloCliente;
+﻿using FestasInfantis.Dominio.ModuloAluguel;
+using FestasInfantis.Dominio.ModuloCliente;
+using FestasInfantis.Dominio.ModuloItem;
+using FestasInfantis.Dominio.ModuloTema;
 using FestasInfantis.Infra.Dados.Sql.ModuloAluguel;
 using FestasInfantis.Infra.Dados.Sql.ModuloCliente;
 using Microsoft.Data.SqlClient;
@@ -11,7 +14,53 @@ namespace FestasInfantis.ConsoleApp
         {
             RepositorioAluguelEmSql rep = new RepositorioAluguelEmSql();
 
-            rep.SelecionarTodos();  
+            //Endereco endereco = new Endereco("Marechal Deodoro", "Centro", "Lages", "SC", "40");
+            //Festa festa = new Festa(endereco, DateTime.Now, TimeSpan.Parse("1200"), TimeSpan.Parse("1800"));
+
+            //Cliente cliente = new Cliente(22, "Tiago Santini", "(49) 98505-6251");
+
+            //Tema tema = new Tema(1, "Festa de Aniversário");
+
+            //Aluguel aluguel = new Aluguel(cliente, festa, tema, 40, 0.0m);
+
+            //rep.Inserir(aluguel);
+
+            //Festa festa2 = new Festa(endereco, DateTime.Now.AddDays(1), TimeSpan.Parse("1400"), TimeSpan.Parse("1500"));
+
+            //aluguel.Festa = festa2;
+            //aluguel.Concluir();
+
+            //rep.Editar(1, aluguel);
+
+            //Aluguel aluguel = rep.SelecionarPorId(2);
+
+            //rep.Excluir(aluguel);
+
+            int qtdPendente = rep.SelecionarPendentes().Count;
+
+            if (qtdPendente == 3) 
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("SelecionarPendentes - Ok");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("SelecionarPendentes - Bug");
+            }
+
+            int qtdConcluido = rep.SelecionarConcluidos().Count;
+
+            if (qtdConcluido == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("SelecionarConcluidos - Ok");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("SelecionarConcluidos - Bug");
+            }
 
             //Cliente novoCliente = ObterCliente();
 
@@ -27,6 +76,8 @@ namespace FestasInfantis.ConsoleApp
             //Excluir(cliente.id);
 
             //List<Cliente> clientes = SelecionarTodos();
+            
+            Console.ReadKey();
         }
 
         private static List<Cliente> SelecionarTodos()
@@ -218,11 +269,11 @@ namespace FestasInfantis.ConsoleApp
 
         private static Cliente ObterCliente()
         {
-            Console.WriteLine( "Digite o nome: " );
+            Console.WriteLine("Digite o nome: ");
 
-            string nome = Console.ReadLine();   
+            string nome = Console.ReadLine();
 
-            Console.WriteLine( "Digite o telefone: " );
+            Console.WriteLine("Digite o telefone: ");
 
             string telefone = Console.ReadLine();
 

@@ -160,7 +160,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                         break;
 
                     case StatusAluguelEnum.Concluidos:
-                        alugueis = repositorioAluguel.SelecionarConcluidas();
+                        alugueis = repositorioAluguel.SelecionarConcluidos();
                         break;
 
                     default:

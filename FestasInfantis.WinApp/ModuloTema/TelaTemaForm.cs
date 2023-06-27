@@ -22,16 +22,10 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             Tema tema = new Tema(nome);
 
-            List<Item> itensMarcados = ObterItensMarcados();
-
-            foreach (Item item in itensMarcados)
-            {
-                tema.AdicionarItem(item);
-            }
-
             if (id > 0)
-                tema.id = id;
-
+            {
+                tema.id = id;               
+            }
             return tema;
         }
 

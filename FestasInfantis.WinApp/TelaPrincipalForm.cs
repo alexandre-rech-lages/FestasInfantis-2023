@@ -13,6 +13,10 @@ using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloItem;
 using FestasInfantis.WinApp.ModuloTema;
 
+using FestasInfantis.Infra.Dados.Sql.ModuloAluguel;
+using FestasInfantis.Infra.Dados.Sql.ModuloItem;
+using FestasInfantis.Infra.Dados.Sql.ModuloTema;
+
 namespace FestasInfantis.WinApp
 {
     public partial class TelaPrincipalForm : Form
@@ -23,13 +27,14 @@ namespace FestasInfantis.WinApp
 
         private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
 
-        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmArquivo(contextoDados);
+        private IRepositorioCliente repositorioCliente = new RepositorioClienteEmSql();
 
-        private IRepositorioItem repositorioItem = new RepositorioItemEmArquivo(contextoDados);
+        private IRepositorioItem repositorioItem = new RepositorioItemEmSql();
 
-        private IRepositorioTema repositorioTema = new RepositorioTemaEmArquivo(contextoDados);
+        private IRepositorioTema repositorioTema = new RepositorioTemaEmSql();
 
-        private IRepositorioAluguel repositorioAluguel = new RepositorioAluguelEmArquivo(contextoDados);
+        private IRepositorioAluguel repositorioAluguel = new RepositorioAluguelEmSql();
+
 
         private static TelaPrincipalForm telaPrincipal;
 

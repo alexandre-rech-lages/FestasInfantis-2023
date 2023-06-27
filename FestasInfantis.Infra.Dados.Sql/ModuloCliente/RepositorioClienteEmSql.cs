@@ -19,7 +19,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 		            @NOME, 
 		            @TELEFONE
 	            );                 
-                SELECT SCOPE_IDENTITY();";
+
+            SELECT SCOPE_IDENTITY();";
 
         private const string sqlEditarCliente =
             @"UPDATE [TBCLIENTE] 

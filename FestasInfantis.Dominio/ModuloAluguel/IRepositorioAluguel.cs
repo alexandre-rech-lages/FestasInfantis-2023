@@ -10,7 +10,7 @@ namespace FestasInfantis.Dominio.ModuloAluguel
         void Excluir(Aluguel aluguelSelecionado);
         List<Aluguel> SelecionarTodos();
         Aluguel SelecionarPorId(int id);
-        List<Aluguel> SelecionarConcluidas();
+        List<Aluguel> SelecionarConcluidos();
         List<Aluguel> SelecionarPendentes();
         bool VerificarAlugueisAbertosCliente(Cliente cliente);
         bool VerificarTemasIndisponiveis(Tema tema);

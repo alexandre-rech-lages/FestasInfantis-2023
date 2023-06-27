@@ -42,10 +42,13 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Tema Tema = telaTema.ObterTema();
+                Tema tema = telaTema.ObterTema();
 
-                repositorioTema.Inserir(Tema);
+                List<Item> itensAdicionados = telaTema.ObterItensMarcados();
+
+                repositorioTema.Inserir(tema, itensAdicionados);
             }
+
             CarregarTemas();
         }
 

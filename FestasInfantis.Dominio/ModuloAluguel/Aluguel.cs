@@ -6,7 +6,7 @@ namespace FestasInfantis.Dominio.ModuloAluguel
     [Serializable]
     public class Aluguel : EntidadeBase<Aluguel>
     {
-        public Festa Festa { get; set; }
+        public Festa Festa { get; set; }        
 
         public Cliente Cliente { get; set; }        
         public Tema Tema { get; set; }
