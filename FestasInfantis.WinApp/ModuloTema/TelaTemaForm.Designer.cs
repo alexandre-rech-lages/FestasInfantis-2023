@@ -34,10 +34,8 @@
             txtId = new TextBox();
             label2 = new Label();
             txtNome = new TextBox();
-            lblValor = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            txtValor = new TextBox();
             tabPage2 = new TabPage();
             listItensTema = new CheckedListBox();
             tabControl1.SuspendLayout();
@@ -55,6 +53,7 @@
             btnGravar.TabIndex = 0;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
+            btnGravar.Click += btnGravar_Click;
             // 
             // btnCancelar
             // 
@@ -102,15 +101,6 @@
             txtNome.Size = new Size(290, 23);
             txtNome.TabIndex = 5;
             // 
-            // lblValor
-            // 
-            lblValor.AutoSize = true;
-            lblValor.Location = new Point(47, 95);
-            lblValor.Name = "lblValor";
-            lblValor.Size = new Size(36, 15);
-            lblValor.TabIndex = 10;
-            lblValor.Text = "Valor:";
-            // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
@@ -123,10 +113,8 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(txtValor);
             tabPage1.Controls.Add(lblId);
             tabPage1.Controls.Add(txtId);
-            tabPage1.Controls.Add(lblValor);
             tabPage1.Controls.Add(txtNome);
             tabPage1.Controls.Add(label2);
             tabPage1.Location = new Point(4, 24);
@@ -136,16 +124,6 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Dados Básicos";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // txtValor
-            // 
-            txtValor.Enabled = false;
-            txtValor.Location = new Point(89, 91);
-            txtValor.Name = "txtValor";
-            txtValor.ReadOnly = true;
-            txtValor.Size = new Size(67, 23);
-            txtValor.TabIndex = 11;
-            txtValor.Text = "0";
             // 
             // tabPage2
             // 
@@ -197,11 +175,9 @@
         private TextBox txtId;
         private Label label2;
         private TextBox txtNome;
-        private Label lblValor;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private TextBox txtValor;
         private CheckedListBox listItensTema;
     }
 }

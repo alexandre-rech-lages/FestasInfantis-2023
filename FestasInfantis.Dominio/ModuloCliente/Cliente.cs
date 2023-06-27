@@ -6,36 +6,39 @@ namespace FestasInfantis.Dominio.ModuloCliente
     public class Cliente : EntidadeBase<Cliente>
     {
         public string nome { get; set; }
-        
+
         public string telefone { get; set; }
 
-        public List<Aluguel> Alugueis { get; set; } = new List<Aluguel>();
+        public List<Aluguel> Alugueis { get; set; } 
 
-        public int QuantidadeAlugueis { get { return Alugueis.Where(x => x.PagamentoConcluido).Count(); } }
+        public int QuantidadeAlugueisConcluidos
+        {
+            get
+            {
+                return Alugueis.Where(x => x.PagamentoConcluido).Count();
+            }
+        }
 
         public Cliente()
         {
-            
+            Alugueis = new List<Aluguel>();
         }
 
-        public Cliente(int id, string nome, string telefone)
+        public Cliente(int id, string nome, string telefone) : this ()
         {
             this.id = id;
             this.nome = nome;
             this.telefone = telefone;
         }
 
-        public Cliente(string nome, string telefone)
+        public Cliente(string nome, string telefone) : this()
         {
             this.nome = nome;
             this.telefone = telefone;
         }
 
         public void RegistrarAluguel(Aluguel aluguel)
-        {
-            if (Alugueis == null)
-                Alugueis = new List<Aluguel>();
-
+        {            
             if (Alugueis.Contains(aluguel))
                 return;
 
@@ -70,7 +73,7 @@ namespace FestasInfantis.Dominio.ModuloCliente
 
         public decimal CalcularDesconto(ConfiguracaoDesconto configuracaoDesconto)
         {
-            decimal desconto = QuantidadeAlugueis * configuracaoDesconto.PorcentagemDesconto;
+            decimal desconto = QuantidadeAlugueisConcluidos * configuracaoDesconto.PorcentagemDesconto;
 
             if (desconto > configuracaoDesconto.PorcentagemMaxima)
                 desconto = configuracaoDesconto.PorcentagemMaxima;
@@ -85,7 +88,7 @@ namespace FestasInfantis.Dominio.ModuloCliente
                    nome == cliente.nome &&
                    telefone == cliente.telefone &&
                    EqualityComparer<List<Aluguel>>.Default.Equals(Alugueis, cliente.Alugueis) &&
-                   QuantidadeAlugueis == cliente.QuantidadeAlugueis;
+                   QuantidadeAlugueisConcluidos == cliente.QuantidadeAlugueisConcluidos;
         }
     }
 }

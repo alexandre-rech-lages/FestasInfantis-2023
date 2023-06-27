@@ -24,7 +24,7 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             if (id > 0)
             {
-                tema.id = id;               
+                tema.id = id;
             }
             return tema;
         }
@@ -45,8 +45,6 @@ namespace FestasInfantis.WinApp.ModuloTema
             txtId.Text = tema.id.ToString();
 
             txtNome.Text = tema.nome;
-
-            txtValor.Text = tema.CalcularValor().ToString();
 
             int i = 0;
 
@@ -82,7 +80,9 @@ namespace FestasInfantis.WinApp.ModuloTema
             foreach (Item item in itensSelecionados)
             {
                 listItensTema.Items.Add(item);
-            }            
+            }
         }
+
+       
     }
 }

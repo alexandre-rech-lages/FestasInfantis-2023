@@ -33,12 +33,7 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 {
                     Name = "telefone",
                     HeaderText = "Telefone"
-                },
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "quantidadealugueis",
-                    HeaderText = "Aluguéis Concluídos"
-                },
+                }
             };
 
             gridClientes.Columns.AddRange(colunas);
@@ -50,7 +45,7 @@ namespace FestasInfantis.WinApp.ModuloCliente
 
             foreach (Cliente cliente in clientes)
             {
-                gridClientes.Rows.Add(cliente.id, cliente.nome, cliente.telefone, cliente.QuantidadeAlugueis);
+                gridClientes.Rows.Add(cliente.id, cliente.nome, cliente.telefone);
             }
         }
 

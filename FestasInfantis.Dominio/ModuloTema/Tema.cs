@@ -9,29 +9,26 @@ namespace FestasInfantis.Dominio.ModuloTema
 
         public List<Item> Itens { get; set; }
 
-        public Tema(int idTema, string nome)
-        {
-            this.id = idTema;   
-            this.nome = nome;
-            this.Itens = new List<Item>();
-        }
-
         public Tema()
-        {            
+        {
+            this.Itens = new List<Item>();
         }
 
-        public Tema(string nome)
+        public Tema(string nome) : this()
         {
             this.nome = nome;
-            this.Itens = new List<Item>();
+        }
+
+        public Tema(int idTema, string nome) : this()
+        {
+            this.id = idTema;
+            this.nome = nome;
         }
 
         public void AdicionarItem(Item item)
         {
-            if (Itens == null)
-                Itens = new List<Item>();
-
-            Itens.Add(item);
+            if (Itens.Contains(item) == false)
+                Itens.Add(item);
         }
 
         public decimal CalcularValor()
@@ -69,10 +66,12 @@ namespace FestasInfantis.Dominio.ModuloTema
             if (nome.Length < 3)
                 erros.Add("O campo 'Nome' deve conter no mínimo 3 caracteres");
 
-            if (CalcularValor() < 1)
-                erros.Add("O campo 'Valor' não pode receber o valor 0");
-
             return erros.ToArray();
+        }
+
+        public bool Contem(Item item)
+        {
+            return Itens.Contains(item);
         }
     }
 }

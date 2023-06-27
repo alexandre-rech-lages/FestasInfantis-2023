@@ -29,10 +29,6 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         public override string ToolTipExcluir { get { return "Excluir Tema existente"; } }
 
-        public override string ToolTipAdicionarItens { get { return "Adicionar Itens"; } }
-
-        public override bool AdicionarItensHabilitado { get { return true; } }
-
         public override void Inserir()
         {
             List<Item> itens = repositorioItem.SelecionarTodos();
@@ -80,7 +76,6 @@ namespace FestasInfantis.WinApp.ModuloTema
             CarregarTemas();
         }
 
-
         public override void Excluir()
         {
             Tema tema = ObterTemaSelecionado();
@@ -115,33 +110,7 @@ namespace FestasInfantis.WinApp.ModuloTema
             }
             CarregarTemas();
         }
-
-        public override void Adicionar()
-        {
-            Tema tema = ObterTemaSelecionado();
-
-            if (tema == null)
-            {
-                MessageBox.Show($"Selecione um tema primeiro!",
-                    "Adicionar Item de Tema",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
-
-            //TelaSelecaoItensForm telaItens = new TelaSelecaoItensForm(repositorioItem.SelecionarTodos(), tema);
-
-            //DialogResult resultado = telaItens.ShowDialog();
-
-            //if (resultado == DialogResult.OK)
-            //{
-            //    tema.AtualizarItens(telaItens.ObterItensMarcados());
-
-            //    repositorioTema.Editar(tema.id, tema);
-            //}
-        }
-
+            
         private Tema ObterTemaSelecionado()
         {
             int id = tabelaTema.ObterIdSelecionado();
