@@ -138,14 +138,21 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
             Cliente cliente = null;
 
             if (leitorClientes.Read())            
-                cliente = ConverterParaCliente(leitorClientes);            
+                cliente = ConverterParaCliente(leitorClientes);
+
+            if (cliente != null)
+                CarregarAlugueis(cliente);
 
             //encerra a conexão
             conexaoComBanco.Close();
 
             return cliente;
         }
-      
+
+        private void CarregarAlugueis(Cliente cliente)
+        { 
+        }
+
         public List<Cliente> SelecionarTodos()
         {
             //obter a conexão com o banco e abrir ela

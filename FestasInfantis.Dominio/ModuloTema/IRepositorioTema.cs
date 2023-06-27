@@ -1,12 +1,14 @@
-﻿namespace FestasInfantis.Dominio.ModuloTema
+﻿using FestasInfantis.Dominio.ModuloItem;
+
+namespace FestasInfantis.Dominio.ModuloTema
 {
     public interface IRepositorioTema
     {
-        void Inserir(Tema tema, List<ModuloItem.Item> itensAdicionados);
+        void Inserir(Tema tema, List<Item> itensAdicionados);
 
-        void Editar(int id, Tema tema);
+        void Editar(int id, Tema tema, List<Item> itensMarcados, List<Item> itensDesmarcados);
         void Excluir(Tema temaSelecionado);
-        List<Tema> SelecionarTodos();
+        List<Tema> SelecionarTodos(bool carregarItens = false);
         Tema SelecionarPorId(int id);
     }
 }

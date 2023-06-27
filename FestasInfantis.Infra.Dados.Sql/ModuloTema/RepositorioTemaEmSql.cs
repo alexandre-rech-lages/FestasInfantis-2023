@@ -13,10 +13,12 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             @"INSERT INTO [TBTEMA]
                 (
                     [NOME]
+                   ,[VALOR]
                 )
              VALUES
                 (
                     @NOME
+                   ,@VALOR
                 )
 
             SELECT SCOPE_IDENTITY();";
@@ -25,6 +27,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
            @"UPDATE [TBTEMA]
                 SET 
                     [NOME] = @NOME
+                   ,[VALOR] = @VALOR
 
 	            WHERE 
 		            [ID] = @ID";
@@ -36,20 +39,26 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
 
         private const string sqlSelecionarTodos =
           @"SELECT
-                [ID] TEMA_ID
-	           ,[NOME] TEMA_NOME
+
+                [ID]    TEMA_ID
+	           ,[NOME]  TEMA_NOME
+	           ,[VALOR] TEMA_VALOR
+
             FROM 
 	            [TBTEMA]";
 
         private const string sqlSelecionarPorId =
             @"SELECT 
-                [ID] TEMA_ID
-	           ,[NOME] TEMA_NOME
+
+                [ID]    TEMA_ID
+	           ,[NOME]  TEMA_NOME
+	           ,[VALOR] TEMA_VALOR
+
             FROM 
 	            [TBTEMA] 
             WHERE 
                 [ID] = @ID";
-        
+
         private const string sqlAdicionarItem =
             @"INSERT INTO [TBTema_TBItem]
                 (
@@ -76,8 +85,19 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
 
 	            TI.TEMA_ID = @TEMA_ID";
 
+        private const string sqlRemoverItens =
+            @"DELETE FROM TBTEMA_TBITEM 
+                WHERE TEMA_ID = @TEMA_ID AND ITEM_ID = @ITEM_ID";
+
         public void Inserir(Tema novoTema, List<Item> itensAdicionados)
         {
+            foreach (Item item in itensAdicionados)
+            {
+                novoTema.AdicionarItem(item);
+            }
+
+            novoTema.CalcularValor();
+
             //obter a conexão com o banco e abrir ela
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();
@@ -124,8 +144,28 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             conexaoComBanco.Close();
         }
 
-        public void Editar(int id, Tema tema)
+        public void Editar(int id, Tema tema, List<Item> itensMarcados, List<Item> itensDesmarcados)
         {
+            foreach (Item itemParaAdicionar in itensMarcados)
+            {
+                if (tema.Contem(itemParaAdicionar))
+                    continue;
+
+                AdicionarItem(itemParaAdicionar, tema);
+                tema.AdicionarItem(itemParaAdicionar);
+            }
+
+            foreach (Item itemParaRemover in itensDesmarcados)
+            {
+                if (tema.Contem(itemParaRemover))
+                {
+                    RemoverItem(itemParaRemover, tema);
+                    tema.RemoverItem(itemParaRemover);
+                }
+            }
+
+            tema.CalcularValor();
+
             //obter a conexão com o banco e abrir ela
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();
@@ -141,11 +181,37 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             comandoEditar.ExecuteNonQuery();
 
             //encerra a conexão
+            conexaoComBanco.Close();                 
+        }
+
+        private void RemoverItem(Item item, Tema tema)
+        {
+            //obter a conexão com o banco e abrir ela
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+            conexaoComBanco.Open();
+
+            //cria um comando e relaciona com a conexão aberta
+            SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
+            comandoInserir.CommandText = sqlRemoverItens;
+
+            //adiciona os parâmetros no comando
+            comandoInserir.Parameters.AddWithValue("TEMA_ID", tema.id);
+            comandoInserir.Parameters.AddWithValue("ITEM_ID", item.id);
+
+            //executa o comando
+            comandoInserir.ExecuteNonQuery();
+
+            //fecha conexão
             conexaoComBanco.Close();
         }
 
         public void Excluir(Tema temaSelecionado)
         {
+            foreach (Item itemParaRemover in temaSelecionado.Itens)
+            {
+                RemoverItem(itemParaRemover, temaSelecionado);
+            }
+
             //obter a conexão com o banco e abrir ela
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
             conexaoComBanco.Open();
@@ -161,8 +227,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             comandoExcluir.ExecuteNonQuery();
 
             //encerra a conexão
-            conexaoComBanco.Close();
-        }        
+            conexaoComBanco.Close();           
+        }
 
         public Tema SelecionarPorId(int id)
         {
@@ -209,8 +275,6 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             //executa o comando
             SqlDataReader leitorItem = comandoSelecionarItens.ExecuteReader();
 
-            List<Item> itens = new List<Item>();
-
             while (leitorItem.Read())
             {
                 Item item = ConverterParaItem(leitorItem);
@@ -231,7 +295,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             return new Item(id, descricao, valor);
         }
 
-        public List<Tema> SelecionarTodos()
+        public List<Tema> SelecionarTodos(bool carregarItens = false)
         {
             //obter a conexão com o banco e abrir ela
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
@@ -250,6 +314,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             {
                 Tema tema = ConverterParaTema(leitorTemas);
 
+                if (carregarItens)
+                    CarregarItens(tema);
+
                 temas.Add(tema);
             }
 
@@ -265,7 +332,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
 
             string nome = Convert.ToString(leitorTemas["TEMA_NOME"]);
 
-            return new Tema(id, nome);
+            decimal valor = Convert.ToDecimal(leitorTemas["TEMA_VALOR"]);
+
+            return new Tema(id, nome, valor);
         }
 
         private void ConfigurarParametros(SqlCommand comandoInserir, Tema novoTema)
@@ -273,6 +342,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloTema
             comandoInserir.Parameters.AddWithValue("ID", novoTema.id);
 
             comandoInserir.Parameters.AddWithValue("NOME", novoTema.nome);
+
+            comandoInserir.Parameters.AddWithValue("VALOR", novoTema.Valor);
         }
     }
 }

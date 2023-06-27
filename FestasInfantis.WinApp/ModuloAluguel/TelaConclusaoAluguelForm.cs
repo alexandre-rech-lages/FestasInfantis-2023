@@ -76,7 +76,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             Tema temaSelecionado = aluguelSelecionado.Tema;
 
-            decimal valorTotal = temaSelecionado.CalcularValor();
+            decimal valorTotal = temaSelecionado.Valor;
 
             txtValorTema.Text = valorTotal.ToString();
 

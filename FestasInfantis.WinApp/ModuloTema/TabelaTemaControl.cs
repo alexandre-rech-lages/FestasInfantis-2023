@@ -1,13 +1,4 @@
 ﻿using FestasInfantis.Dominio.ModuloTema;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace FestasInfantis.WinApp.ModuloTema
 {
@@ -53,7 +44,7 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             foreach (Tema tema in temas)
             {
-                gridTemas.Rows.Add(tema.id, tema.nome, tema.CalcularValor());
+                gridTemas.Rows.Add(tema.id, tema.nome, tema.Valor);
             }
         }
 

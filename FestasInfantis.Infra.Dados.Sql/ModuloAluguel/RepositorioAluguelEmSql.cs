@@ -102,6 +102,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
                 ,T.[ID]                      TEMA_ID
                 ,T.[NOME]                    TEMA_NOME
+                ,T.[VALOR]                    TEMA_VALOR
 
                 ,C.[ID]                      CLIENTE_ID
                 ,C.[NOME]                    CLIENTE_NOME
@@ -142,6 +143,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
                 ,T.[ID]                      TEMA_ID
                 ,T.[NOME]                    TEMA_NOME
+                ,T.[VALOR]                   TEMA_VALOR
 
                 ,C.[ID]                      CLIENTE_ID
                 ,C.[NOME]                    CLIENTE_NOME
@@ -186,6 +188,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
                 ,T.[ID]                      TEMA_ID
                 ,T.[NOME]                    TEMA_NOME
+                ,T.[VALOR]                   TEMA_VALOR
 
                 ,C.[ID]                      CLIENTE_ID
                 ,C.[NOME]                    CLIENTE_NOME
@@ -230,6 +233,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
                 ,T.[ID]                      TEMA_ID
                 ,T.[NOME]                    TEMA_NOME
+                ,T.[VALOR]                   TEMA_VALOR
 
                 ,C.[ID]                      CLIENTE_ID
                 ,C.[NOME]                    CLIENTE_NOME
@@ -502,9 +506,12 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
         private static Tema ConverterParaTema(SqlDataReader leitorAlugueis)
         {
-            int idTema = Convert.ToInt32(leitorAlugueis["TEMA_ID"]);
-            string nomeTema = Convert.ToString(leitorAlugueis["TEMA_NOME"]);
-            Tema tema = new Tema(idTema, nomeTema);
+            int id = Convert.ToInt32(leitorAlugueis["TEMA_ID"]);
+            string nome = Convert.ToString(leitorAlugueis["TEMA_NOME"]);
+            decimal valor = Convert.ToDecimal(leitorAlugueis["TEMA_VALOR"]);
+
+            Tema tema = new Tema(id, nome, valor);
+
             return tema;
         }
 

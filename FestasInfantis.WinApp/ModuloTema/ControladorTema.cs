@@ -33,6 +33,7 @@ namespace FestasInfantis.WinApp.ModuloTema
         {
             List<Item> itens = repositorioItem.SelecionarTodos();
             TelaTemaForm telaTema = new TelaTemaForm(itens);
+            telaTema.ConfigurarTela(new Tema());
 
             DialogResult opcaoEscolhida = telaTema.ShowDialog();
 
@@ -69,8 +70,13 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Tema TemaAtualizado = telaTema.ObterTema();
-                repositorioTema.Editar(TemaAtualizado.id, TemaAtualizado);
+                Tema temaAtualizado = telaTema.ObterTema();
+
+                List<Item> itensMarcados = telaTema.ObterItensMarcados();
+
+                List<Item> itensDesmarcados = telaTema.ObterItensDesmarcados();
+
+                repositorioTema.Editar(temaAtualizado.id, temaAtualizado, itensMarcados, itensDesmarcados);
             }
 
             CarregarTemas();
@@ -108,6 +114,7 @@ namespace FestasInfantis.WinApp.ModuloTema
             {
                 repositorioTema.Excluir(tema);
             }
+
             CarregarTemas();
         }
             

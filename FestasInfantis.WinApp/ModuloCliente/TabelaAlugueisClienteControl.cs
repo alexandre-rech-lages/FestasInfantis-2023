@@ -66,7 +66,7 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 gridAlugueis.Rows.Add(
                     aluguel.id,
                     aluguel.Tema,
-                    aluguel.Tema.CalcularValor(),
+                    aluguel.Tema.Valor,
                     statusPagamento
                 ); ;
             }

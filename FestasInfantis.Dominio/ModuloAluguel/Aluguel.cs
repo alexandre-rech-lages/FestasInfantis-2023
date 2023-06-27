@@ -38,12 +38,12 @@ namespace FestasInfantis.Dominio.ModuloAluguel
 
         public decimal CalcularValorSinal()
         {
-            return Tema.CalcularValor() * PorcentagemSinal / 100;
+            return Tema.Valor * PorcentagemSinal / 100;
         }
 
         public decimal CalcularValorDesconto()
         {
-            return Tema.CalcularValor() - Tema.CalcularValor() * PorcentagemDesconto / 100;
+            return Tema.Valor - Tema.Valor * PorcentagemDesconto / 100;
         }
 
         public void Concluir()

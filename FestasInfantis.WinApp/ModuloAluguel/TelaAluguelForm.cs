@@ -145,7 +145,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             Tema temaSelecionado = temas.Find(t => t == cmbTemas.SelectedItem);
 
-            decimal valorTotal = temaSelecionado.CalcularValor();
+            decimal valorTotal = temaSelecionado.Valor;
 
             txtValorTema.Text = valorTotal.ToString();
 

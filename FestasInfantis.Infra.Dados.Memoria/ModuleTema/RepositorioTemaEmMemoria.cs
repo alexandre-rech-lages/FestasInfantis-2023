@@ -10,7 +10,17 @@ namespace FestasInfantis.Infra.Dados.Memoria.ModuleTema
         {
         }
 
+        public void Editar(int id, Tema tema, List<Item> itensMarcados, List<Item> itensDesmarcados)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Inserir(Tema tema, List<Item> itensAdicionados)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Tema> SelecionarTodos(bool carregarItens = false)
         {
             throw new NotImplementedException();
         }

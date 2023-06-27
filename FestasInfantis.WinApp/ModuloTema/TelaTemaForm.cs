@@ -5,6 +5,8 @@ namespace FestasInfantis.WinApp.ModuloTema
 {
     public partial class TelaTemaForm : Form
     {
+        private Tema tema;
+
         public TelaTemaForm(List<Item> itensDisponiveis)
         {
             InitializeComponent();
@@ -20,12 +22,13 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             string nome = txtNome.Text;
 
-            Tema tema = new Tema(nome);
+            tema.nome = nome;
 
             if (id > 0)
             {
                 tema.id = id;
             }
+
             return tema;
         }
 
@@ -42,6 +45,8 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         public void ConfigurarTela(Tema tema)
         {
+            this.tema = tema;
+
             txtId.Text = tema.id.ToString();
 
             txtNome.Text = tema.nome;
@@ -61,7 +66,7 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            Tema tema = ObterTema();
+            Tema tema = ObterTema();            
 
             string[] erros = tema.Validar();
 

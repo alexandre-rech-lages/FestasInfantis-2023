@@ -7,6 +7,8 @@ namespace FestasInfantis.Dominio.ModuloTema
     {
         public string nome;
 
+        public decimal Valor { get; set; }
+
         public List<Item> Itens { get; set; }
 
         public Tema()
@@ -19,10 +21,11 @@ namespace FestasInfantis.Dominio.ModuloTema
             this.nome = nome;
         }
 
-        public Tema(int idTema, string nome) : this()
+        public Tema(int idTema, string nome, decimal valor) : this()
         {
             this.id = idTema;
             this.nome = nome;
+            this.Valor = valor;
         }
 
         public void AdicionarItem(Item item)
@@ -31,12 +34,10 @@ namespace FestasInfantis.Dominio.ModuloTema
                 Itens.Add(item);
         }
 
-        public decimal CalcularValor()
+        public void CalcularValor()
         {
             if (Itens != null)
-                return Itens.Aggregate(0m, (soma, item) => soma + item.valor);
-
-            return 0;
+                Valor = Itens.Sum(x => x.valor);            
         }
 
         public void AtualizarItens(List<Item> itens)
@@ -72,6 +73,11 @@ namespace FestasInfantis.Dominio.ModuloTema
         public bool Contem(Item item)
         {
             return Itens.Contains(item);
+        }
+
+        public void RemoverItem(Item itemParaRemover)
+        {
+            Itens.Remove(itemParaRemover);
         }
     }
 }
