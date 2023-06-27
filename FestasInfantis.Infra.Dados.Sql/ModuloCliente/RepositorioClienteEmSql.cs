@@ -8,7 +8,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
         private const string enderecoBanco = 
             @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=FestasInfantisDb;Integrated Security=True";
 
-        private const string sqlInserirCliente =
+        private const string sqlInserir =
             @"INSERT INTO [TBCLIENTE] 
 	            (
 		            [NOME], 
@@ -22,7 +22,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             SELECT SCOPE_IDENTITY();";
 
-        private const string sqlEditarCliente =
+        private const string sqlEditar =
             @"UPDATE [TBCLIENTE] 
 	            SET 
 		            [NOME] = @NOME,
@@ -30,24 +30,28 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 	            WHERE 
 		            [ID] = @ID";
 
-        private const string sqlExcluirCliente =
+        private const string sqlExcluir =
             @"DELETE FROM [TBCLIENTE]
 	            WHERE 
 		            [ID] = @ID";
 
-        private const string sqlSelecionarTodosClientes =
+        private const string sqlSelecionarTodos =
             @"SELECT 
-	            [ID], 
-	            [NOME], 
-	            [TELEFONE] 
+
+	            [ID]        CLIENTE_ID 
+	           ,[NOME]      CLIENTE_NOME
+	           ,[TELEFONE]  CLIENTE_TELEFONE
+
             FROM 
 	            [TBCLIENTE]";
 
-        private const string sqlSelecionarClientePorId =
+        private const string sqlSelecionarPorId =
             @"SELECT 
-	            [ID], 
-	            [NOME], 
-	            [TELEFONE] 
+
+	            [ID]        CLIENTE_ID 
+	           ,[NOME]      CLIENTE_NOME
+	           ,[TELEFONE]  CLIENTE_TELEFONE
+
             FROM 
 	            [TBCLIENTE] 
             WHERE 
@@ -61,7 +65,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             //cria um comando e relaciona com a conexão aberta
             SqlCommand comandoInserir = conexaoComBanco.CreateCommand();
-            comandoInserir.CommandText = sqlInserirCliente;
+            comandoInserir.CommandText = sqlInserir;
 
             //adiciona os parâmetros no comando
             ConfigurarParametros(comandoInserir, novoCliente);
@@ -83,7 +87,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             //cria um comando e relaciona com a conexão aberta
             SqlCommand comandoEditar = conexaoComBanco.CreateCommand();
-            comandoEditar.CommandText = sqlEditarCliente;
+            comandoEditar.CommandText = sqlEditar;
 
             //adiciona os parâmetros no comando
             ConfigurarParametros(comandoEditar, cliente);
@@ -103,7 +107,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             //cria um comando e relaciona com a conexão aberta
             SqlCommand comandoExcluir = conexaoComBanco.CreateCommand();
-            comandoExcluir.CommandText = sqlExcluirCliente;
+            comandoExcluir.CommandText = sqlExcluir;
 
             //adiciona os parâmetros no comando
             comandoExcluir.Parameters.AddWithValue("ID", clienteSelecionado.id);
@@ -123,7 +127,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             //cria um comando e relaciona com a conexão aberta
             SqlCommand comandoSelecionarPorId = conexaoComBanco.CreateCommand();
-            comandoSelecionarPorId.CommandText = sqlSelecionarClientePorId;
+            comandoSelecionarPorId.CommandText = sqlSelecionarPorId;
 
             //adicionar parametro
             comandoSelecionarPorId.Parameters.AddWithValue("ID", id);
@@ -150,7 +154,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
             //cria um comando e relaciona com a conexão aberta
             SqlCommand comandoSelecionarTodos = conexaoComBanco.CreateCommand();
-            comandoSelecionarTodos.CommandText = sqlSelecionarTodosClientes;            
+            comandoSelecionarTodos.CommandText = sqlSelecionarTodos;            
 
             //executa o comando
             SqlDataReader leitorClientes = comandoSelecionarTodos.ExecuteReader();
@@ -173,11 +177,11 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
         private static Cliente ConverterParaCliente(SqlDataReader leitorClientes)
         {
-            int id = Convert.ToInt32(leitorClientes["ID"]);
+            int id = Convert.ToInt32(leitorClientes["CLIENTE_ID"]);
 
-            string nome = Convert.ToString(leitorClientes["NOME"]);
+            string nome = Convert.ToString(leitorClientes["CLIENTE_NOME"]);
 
-            string telefone = Convert.ToString(leitorClientes["TELEFONE"]);
+            string telefone = Convert.ToString(leitorClientes["CLIENTE_TELEFONE"]);
 
             return new Cliente(id, nome, telefone);
         }
