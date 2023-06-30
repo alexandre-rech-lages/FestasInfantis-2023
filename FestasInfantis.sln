@@ -5,9 +5,9 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{38B7D27C-EB7A-4BDF-8CFA-D82978E0D2A7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infraestrutura", "2 - Infraestrutura", "{BFE092BD-E421-4C27-ABDA-0151ABF53F0E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infraestrutura", "3 - Infraestrutura", "{BFE092BD-E421-4C27-ABDA-0151ABF53F0E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domínio", "3 - Domínio", "{9815CE47-7FB1-47B5-B099-693FD9658B08}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domínio", "2 - Domínio", "{9815CE47-7FB1-47B5-B099-693FD9658B08}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.WinApp", "FestasInfantis.WinApp\FestasInfantis.WinApp.csproj", "{CE8EFD48-6A20-4377-B979-FC2080F6F3A9}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.Infra.Dados.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.ConsoleApp", "FestasInfantis.ConsoleApp\FestasInfantis.ConsoleApp.csproj", "{956FF9C4-DCD8-45CF-8AC8-84EEBC7C18E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FestasInfantis.Infra.Dados.Sql", "FestasInfantis.Infra.Dados.Sql\FestasInfantis.Infra.Dados.Sql.csproj", "{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FestasInfantis.Infra.Dados.Sql", "FestasInfantis.Infra.Dados.Sql\FestasInfantis.Infra.Dados.Sql.csproj", "{A26512F7-0BB8-44ED-BF19-DC6EE77F9F10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

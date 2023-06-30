@@ -18,6 +18,8 @@ namespace FestasInfantis.Dominio.ModuloAluguel
 
         public Aluguel()
         {
+            Cliente = new Cliente();
+            Tema = new Tema();
         }
 
         public Aluguel(Cliente cliente, Festa festa, Tema tema, decimal porcentagemSinal, decimal porcentagemDesconto)

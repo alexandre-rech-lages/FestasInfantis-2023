@@ -2,6 +2,7 @@
 using FestasInfantis.Dominio.ModuloCliente;
 using FestasInfantis.Dominio.ModuloTema;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics.SymbolStore;
 
 namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 {
@@ -289,9 +290,7 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             comandoEditar.CommandText = sqlEditar;
 
             //adiciona os parâmetros no comando
-            ConfigurarParametros(comandoEditar, aluguel);
-
-            comandoEditar.Parameters.AddWithValue("ID", id);
+            ConfigurarParametros(comandoEditar, aluguel);            
 
             //executa o comando
             comandoEditar.ExecuteNonQuery();
@@ -445,6 +444,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
         private void ConfigurarParametros(SqlCommand comando, Aluguel aluguel)
         {
+            comando.Parameters.AddWithValue("ID", aluguel.id);
+
             comando.Parameters.AddWithValue("PORCENTAGEMSINAL", aluguel.PorcentagemSinal);
             comando.Parameters.AddWithValue("PORCENTAGEMDESCONTO", aluguel.PorcentagemDesconto);
 
@@ -475,9 +476,14 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             decimal porcentagemSinal = Convert.ToDecimal(leitorAlugueis["ALUGUEL_PORCENTAGEM_SINAL"]);
             decimal porcentagemDesconto = Convert.ToDecimal(leitorAlugueis["ALUGUEL_PORCENTAGEM_DESCONTO"]);
 
-            DateTime dataPagamento;
+            bool pagamentoConcluido = false;
+            DateTime dataPagamento = DateTime.MinValue;
+
             if (leitorAlugueis["ALUGUEL_DATA_PAGAMENTO"] != DBNull.Value)
+            {
                 dataPagamento = Convert.ToDateTime(leitorAlugueis["ALUGUEL_DATA_PAGAMENTO"]);
+                pagamentoConcluido = Convert.ToBoolean(leitorAlugueis["ALUGUEL_PAGAMENTO_CONCLUIDO"]);
+            }
 
             Festa festa = ConverterParaFesta(leitorAlugueis);
 
@@ -488,6 +494,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             Aluguel aluguel = new Aluguel(cliente, festa, tema, porcentagemSinal, porcentagemDesconto);
 
             aluguel.id = id;
+            aluguel.PagamentoConcluido = pagamentoConcluido;
+            aluguel.DataPagamento = dataPagamento;
 
             return aluguel;
         }

@@ -9,7 +9,7 @@ namespace FestasInfantis.Dominio.ModuloCliente
 
         public string telefone { get; set; }
 
-        public List<Aluguel> Alugueis { get; set; } 
+        public List<Aluguel> Alugueis { get; set; }        
 
         public int QuantidadeAlugueisConcluidos
         {
@@ -86,9 +86,7 @@ namespace FestasInfantis.Dominio.ModuloCliente
             return obj is Cliente cliente &&
                    id == cliente.id &&
                    nome == cliente.nome &&
-                   telefone == cliente.telefone &&
-                   EqualityComparer<List<Aluguel>>.Default.Equals(Alugueis, cliente.Alugueis) &&
-                   QuantidadeAlugueisConcluidos == cliente.QuantidadeAlugueisConcluidos;
+                   telefone == cliente.telefone;
         }
     }
 }

@@ -5,7 +5,9 @@
     {
         public Endereco()
         {
+
         }
+
         public Endereco(string rua, string bairro, string cidade, string estado, string numero)
         {
             Rua = rua;

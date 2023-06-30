@@ -20,5 +20,10 @@ namespace FestasInfantis.Infra.Dados.Memoria.ModuloCliente
 
             Editar(cliente.id, cliente);
         }
+
+        public List<Cliente> SelecionarTodos(bool carregarAlugueis = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

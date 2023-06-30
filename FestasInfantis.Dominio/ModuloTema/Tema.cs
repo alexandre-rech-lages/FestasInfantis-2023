@@ -79,5 +79,13 @@ namespace FestasInfantis.Dominio.ModuloTema
         {
             Itens.Remove(itemParaRemover);
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Tema tema &&
+                   id == tema.id &&
+                   nome == tema.nome &&
+                   Valor == tema.Valor;
+        }
     }
 }

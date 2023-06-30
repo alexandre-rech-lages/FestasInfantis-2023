@@ -10,6 +10,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         private List<Tema> temas;
         private ConfiguracaoDesconto configuracaoDesconto;
 
+        private Aluguel aluguel;
+
         public TelaAluguelForm(ConfiguracaoDesconto configuracaoDesconto, List<Cliente> clientes, List<Tema> temas)
         {
             InitializeComponent();
@@ -58,18 +60,20 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         public void ConfigurarTela(Aluguel aluguel)
         {
+            this.aluguel = aluguel;
+
             txtId.Text = aluguel.id.ToString();
 
-            txtDataFesta.Text = aluguel.Festa.Data.ToString();
+            txtDataFesta.Text = aluguel.Festa?.Data.ToString();
 
-            txtHorarioInicio.Text = aluguel.Festa.HorarioInicio.ToString();
-            txtHorarioTermino.Text = aluguel.Festa.HorarioTermino.ToString();
+            txtHorarioInicio.Text = aluguel.Festa?.HorarioInicio.ToString();
+            txtHorarioTermino.Text = aluguel.Festa?.HorarioTermino.ToString();
 
-            txtCidade.Text = aluguel.Festa.Endereco.Cidade;
-            txtEstado.Text = aluguel.Festa.Endereco.Estado;
-            txtRua.Text = aluguel.Festa.Endereco.Rua;
-            txtBairro.Text = aluguel.Festa.Endereco.Bairro;
-            txtNumero.Text = aluguel.Festa.Endereco.Numero;
+            txtCidade.Text = aluguel.Festa?.Endereco.Cidade;
+            txtEstado.Text = aluguel.Festa?.Endereco.Estado;
+            txtRua.Text = aluguel.Festa?.Endereco.Rua;
+            txtBairro.Text = aluguel.Festa?.Endereco.Bairro;
+            txtNumero.Text = aluguel.Festa?.Endereco.Numero;
 
             cmbClientes.SelectedItem = aluguel.Cliente;
 
@@ -108,9 +112,11 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         private void AtualizarTabelaValores()
         {
-            txtValorPendente.Text = ObterAluguel().CalcularValorPendente().ToString();
-            txtValorSinal.Text = ObterAluguel().CalcularValorSinal().ToString();
-            txtValorDesconto.Text = ObterAluguel().CalcularValorDesconto().ToString();
+            Aluguel aluguel1 = ObterAluguel();
+
+            txtValorPendente.Text = aluguel1.CalcularValorPendente().ToString();
+            txtValorSinal.Text = aluguel1.CalcularValorSinal().ToString();
+            txtValorDesconto.Text = aluguel1.CalcularValorDesconto().ToString();
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -131,6 +137,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             Cliente clienteSelecionado = clientes.Find(c => c == cmbClientes.SelectedItem);
 
+            aluguel.Cliente = clienteSelecionado;
+
             decimal porcentagemDesconto = clienteSelecionado.CalcularDesconto(configuracaoDesconto);
 
             txtPorcentagemDesconto.Text = porcentagemDesconto.ToString();
@@ -145,9 +153,9 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             Tema temaSelecionado = temas.Find(t => t == cmbTemas.SelectedItem);
 
-            decimal valorTotal = temaSelecionado.Valor;
+            aluguel.Tema = temaSelecionado;
 
-            txtValorTema.Text = valorTotal.ToString();
+            txtValorTema.Text = temaSelecionado.Valor.ToString();
 
             if (temaSelecionado != null)
                 pnlDadosAluguel.Enabled = true;

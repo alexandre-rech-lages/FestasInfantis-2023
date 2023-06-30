@@ -9,7 +9,11 @@
         public TimeSpan HorarioTermino { get; set; }
 
         public Festa()
-        {
+        {      
+            Endereco = new Endereco();
+            Data = DateTime.Now;
+            HorarioInicio = TimeSpan.Zero;
+            HorarioTermino = TimeSpan.Zero;
         }
 
         public Festa(Endereco endereco, DateTime data, TimeSpan horarioInicio, TimeSpan horarioTermino)

@@ -45,11 +45,14 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         public override void Inserir()
         {
+
             TelaAluguelForm telaAluguel = 
                 new TelaAluguelForm(
                     repositorioDesconto.ObterConfiguracaoDeDesconto(),
-                    repositorioCliente.SelecionarTodos(),
+                    repositorioCliente.SelecionarTodos(carregarAlugueis: true),
                     repositorioTema.SelecionarTodos());
+
+            telaAluguel.ConfigurarTela(new Aluguel());
 
             DialogResult opcaoEscolhida = telaAluguel.ShowDialog();
 
@@ -90,7 +93,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             TelaAluguelForm telaAluguel =
                 new TelaAluguelForm(
                     repositorioDesconto.ObterConfiguracaoDeDesconto(),
-                    repositorioCliente.SelecionarTodos(),
+                    repositorioCliente.SelecionarTodos(carregarAlugueis: true),
                     repositorioTema.SelecionarTodos());
 
             telaAluguel.ConfigurarTela(aluguel);
