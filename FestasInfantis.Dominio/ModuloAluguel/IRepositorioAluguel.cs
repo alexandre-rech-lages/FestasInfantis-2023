@@ -1,7 +1,4 @@
-﻿using FestasInfantis.Dominio.ModuloCliente;
-using FestasInfantis.Dominio.ModuloTema;
-
-namespace FestasInfantis.Dominio.ModuloAluguel
+﻿namespace FestasInfantis.Dominio.ModuloAluguel
 {
     public interface IRepositorioAluguel
     {
@@ -12,7 +9,5 @@ namespace FestasInfantis.Dominio.ModuloAluguel
         Aluguel SelecionarPorId(int id);
         List<Aluguel> SelecionarConcluidos();
         List<Aluguel> SelecionarPendentes();
-        bool VerificarAlugueisAbertosCliente(Cliente cliente);
-        bool VerificarTemasIndisponiveis(Tema tema);
     }
 }

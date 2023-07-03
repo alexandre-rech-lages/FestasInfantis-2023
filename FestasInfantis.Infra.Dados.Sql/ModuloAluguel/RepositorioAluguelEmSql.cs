@@ -26,6 +26,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 			           ,[ENDERECO_BAIRRO]
 			           ,[ENDERECO_RUA]
 			           ,[ENDERECO_NUMERO]
+                       ,[CONFIGURACAO_PORCENTAGEMDESCONTO]
+                       ,[CONFIGURACAO_PORCENTAGEMMAXIMA]
 			           ,[TEMA_ID]
 			           ,[CLIENTE_ID]
 		           )
@@ -43,6 +45,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 			           ,@ENDERECO_BAIRRO
 			           ,@ENDERECO_RUA
 			           ,@ENDERECO_NUMERO
+                       ,@CONFIGURACAO_PORCENTAGEMDESCONTO
+                       ,@CONFIGURACAO_PORCENTAGEMMAXIMA
 			           ,@TEMA_ID
 			           ,@CLIENTE_ID
 			        );
@@ -68,6 +72,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
                       ,[ENDERECO_NUMERO] = @ENDERECO_NUMERO
                       ,[TEMA_ID] = @TEMA_ID
                       ,[CLIENTE_ID] = @CLIENTE_ID
+                      ,[CONFIGURACAO_PORCENTAGEMDESCONTO] = @CONFIGURACAO_PORCENTAGEMDESCONTO
+                      ,[CONFIGURACAO_PORCENTAGEMMAXIMA] = @CONFIGURACAO_PORCENTAGEMMAXIMA
 
                  WHERE 
 	
@@ -97,6 +103,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
                 ,A.[ENDERECO_BAIRRO]         ALUGUEL_ENDERECO_BAIRRO
                 ,A.[ENDERECO_RUA]            ALUGUEL_ENDERECO_RUA
                 ,A.[ENDERECO_NUMERO]         ALUGUEL_ENDERECO_NUMERO
+
+                ,A.[CONFIGURACAO_PORCENTAGEMDESCONTO]       ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO
+                ,A.[CONFIGURACAO_PORCENTAGEMMAXIMA]         ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA
 
 	            ,A.[TEMA_ID]				 ALUGUEL_TEMA_ID
 	            ,A.[CLIENTE_ID]				 ALUGUEL_CLIENTE_ID
@@ -138,6 +147,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
                 ,A.[ENDERECO_BAIRRO]         ALUGUEL_ENDERECO_BAIRRO
                 ,A.[ENDERECO_RUA]            ALUGUEL_ENDERECO_RUA
                 ,A.[ENDERECO_NUMERO]         ALUGUEL_ENDERECO_NUMERO
+
+                ,A.[CONFIGURACAO_PORCENTAGEMDESCONTO]       ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO
+                ,A.[CONFIGURACAO_PORCENTAGEMMAXIMA]         ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA
 
 	            ,A.[TEMA_ID]				 ALUGUEL_TEMA_ID
 	            ,A.[CLIENTE_ID]				 ALUGUEL_CLIENTE_ID
@@ -183,6 +195,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
                 ,A.[ENDERECO_BAIRRO]         ALUGUEL_ENDERECO_BAIRRO
                 ,A.[ENDERECO_RUA]            ALUGUEL_ENDERECO_RUA
                 ,A.[ENDERECO_NUMERO]         ALUGUEL_ENDERECO_NUMERO
+
+                ,A.[CONFIGURACAO_PORCENTAGEMDESCONTO]       ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO
+                ,A.[CONFIGURACAO_PORCENTAGEMMAXIMA]         ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA
 
 	            ,A.[TEMA_ID]				 ALUGUEL_TEMA_ID
 	            ,A.[CLIENTE_ID]				 ALUGUEL_CLIENTE_ID
@@ -231,6 +246,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
 
 	            ,A.[TEMA_ID]				 ALUGUEL_TEMA_ID
 	            ,A.[CLIENTE_ID]				 ALUGUEL_CLIENTE_ID
+
+                ,A.[CONFIGURACAO_PORCENTAGEMDESCONTO]       ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO
+                ,A.[CONFIGURACAO_PORCENTAGEMMAXIMA]         ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA
 
                 ,T.[ID]                      TEMA_ID
                 ,T.[NOME]                    TEMA_NOME
@@ -464,6 +482,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             comando.Parameters.AddWithValue("ENDERECO_RUA", aluguel.Festa.Endereco.Rua);
             comando.Parameters.AddWithValue("ENDERECO_NUMERO", aluguel.Festa.Endereco.Numero);
 
+            comando.Parameters.AddWithValue("CONFIGURACAO_PORCENTAGEMDESCONTO", aluguel.ConfiguracaoDesconto.PorcentagemDesconto);
+            comando.Parameters.AddWithValue("CONFIGURACAO_PORCENTAGEMMAXIMA", aluguel.ConfiguracaoDesconto.PorcentagemMaxima);
+
             comando.Parameters.AddWithValue("TEMA_ID", aluguel.Tema.id);
             comando.Parameters.AddWithValue("CLIENTE_ID", aluguel.Cliente.id);
 
@@ -476,6 +497,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             decimal porcentagemSinal = Convert.ToDecimal(leitorAlugueis["ALUGUEL_PORCENTAGEM_SINAL"]);
             decimal porcentagemDesconto = Convert.ToDecimal(leitorAlugueis["ALUGUEL_PORCENTAGEM_DESCONTO"]);
 
+             ConverterParaConfiguracaoDesconto(leitorAlugueis);
+
             bool pagamentoConcluido = false;
             DateTime dataPagamento = DateTime.MinValue;
 
@@ -484,6 +507,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
                 dataPagamento = Convert.ToDateTime(leitorAlugueis["ALUGUEL_DATA_PAGAMENTO"]);
                 pagamentoConcluido = Convert.ToBoolean(leitorAlugueis["ALUGUEL_PAGAMENTO_CONCLUIDO"]);
             }
+
+            ConfiguracaoDesconto configuracaoDesconto = ConverterParaConfiguracaoDesconto(leitorAlugueis);
 
             Festa festa = ConverterParaFesta(leitorAlugueis);
 
@@ -496,8 +521,19 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloAluguel
             aluguel.id = id;
             aluguel.PagamentoConcluido = pagamentoConcluido;
             aluguel.DataPagamento = dataPagamento;
+            aluguel.ConfiguracaoDesconto = configuracaoDesconto;
 
             return aluguel;
+        }
+
+        private static ConfiguracaoDesconto ConverterParaConfiguracaoDesconto(SqlDataReader leitorAlugueis)
+        {
+            decimal configuracaoPorcentagemDesconto = Convert.ToDecimal(leitorAlugueis["ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO"]);
+            decimal configuracaoPorcentagemMaxima = Convert.ToDecimal(leitorAlugueis["ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA"]);
+
+            ConfiguracaoDesconto configuracaoDesconto = new ConfiguracaoDesconto(configuracaoPorcentagemDesconto, configuracaoPorcentagemMaxima);
+
+            return configuracaoDesconto;
         }
 
         private static Festa ConverterParaFesta(SqlDataReader leitorAlugueis)

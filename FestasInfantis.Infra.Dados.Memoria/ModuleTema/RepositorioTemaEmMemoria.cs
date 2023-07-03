@@ -24,5 +24,10 @@ namespace FestasInfantis.Infra.Dados.Memoria.ModuleTema
         {
             throw new NotImplementedException();
         }
+
+        public List<Tema> SelecionarTodos(bool carregarItens = false, bool carregarAlugueis = false)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

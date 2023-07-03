@@ -12,8 +12,11 @@
     [Endereco_Bairro]      VARCHAR (300) NOT NULL,
     [Endereco_Rua]         VARCHAR (300) NOT NULL,
     [Endereco_Numero]      INT           NOT NULL,
+    [Configuracao_PorcentagemDesconto]  DECIMAL (18)  NOT NULL DEFAULT 0,
+    [Configuracao_PorcentagemMaxima]  DECIMAL (18)  NOT NULL DEFAULT 0,
     [Tema_Id]              INT           NOT NULL,
     [Cliente_Id]           INT           NOT NULL,
+
     CONSTRAINT [PK_TBAluguel] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_TBAluguel_TBCliente] FOREIGN KEY ([Cliente_Id]) REFERENCES [dbo].[TBCliente] ([Id]),
     CONSTRAINT [FK_TBAluguel_TBTema] FOREIGN KEY ([Tema_Id]) REFERENCES [dbo].[TBTema] ([Id])

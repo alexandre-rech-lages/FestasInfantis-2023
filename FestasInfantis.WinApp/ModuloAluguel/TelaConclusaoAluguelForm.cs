@@ -55,13 +55,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             cmbEntrada.Items.Add(50m);
             cmbEntrada.SelectedIndex = 0;
         }
-
-        private void AtualizarTabelaValores()
-        {
-            txtValorPendente.Text = aluguelSelecionado.CalcularValorPendente().ToString();
-            txtValorSinal.Text = aluguelSelecionado.CalcularValorSinal().ToString();
-            txtValorDesconto.Text = aluguelSelecionado.CalcularValorDesconto().ToString();
-        }
+       
 
         private void AtualizarPorcentagemDesconto(object sender, EventArgs e)
         {
@@ -79,16 +73,12 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             decimal valorTotal = temaSelecionado.Valor;
 
             txtValorTema.Text = valorTotal.ToString();
-
-            AtualizarTabelaValores();
         }
 
         private void AtualizarPorcentagemEntrada(object sender, EventArgs e)
         {
             Tema temaSelecionado = aluguelSelecionado.Tema;
 
-            if (temaSelecionado != null)
-                AtualizarTabelaValores();
         }
     }
 }

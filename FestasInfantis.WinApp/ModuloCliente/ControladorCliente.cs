@@ -106,18 +106,6 @@ namespace FestasInfantis.WinApp.ModuloCliente
                 return;
             }
 
-            bool podeExcluir = repositorioAluguel.VerificarAlugueisAbertosCliente(cliente);
-
-            if (!podeExcluir)
-            {
-                MessageBox.Show($"Não é possível excluir um cliente com aluguéis em aberto.",
-                    "Exclusão de Clientes",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
-
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o cliente {cliente.nome}?", "Exclusão de Clientes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 

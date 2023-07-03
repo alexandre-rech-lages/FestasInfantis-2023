@@ -6,11 +6,11 @@ namespace FestasInfantis.Dominio.ModuloAluguel
     [Serializable]
     public class Aluguel : EntidadeBase<Aluguel>
     {
-        public Festa Festa { get; set; }        
+        public Festa Festa { get; set; }
 
-        public Cliente Cliente { get; set; }        
+        public Cliente Cliente { get; set; }
         public Tema Tema { get; set; }
-
+        public ConfiguracaoDesconto ConfiguracaoDesconto { get; set; }
         public decimal PorcentagemSinal { get; set; }
         public decimal PorcentagemDesconto { get; set; }
         public DateTime? DataPagamento { get; set; }
@@ -33,20 +33,6 @@ namespace FestasInfantis.Dominio.ModuloAluguel
             DataPagamento = null;
         }
 
-        public decimal CalcularValorPendente()
-        {
-            return CalcularValorDesconto() - CalcularValorSinal();
-        }
-
-        public decimal CalcularValorSinal()
-        {
-            return Tema.Valor * PorcentagemSinal / 100;
-        }
-
-        public decimal CalcularValorDesconto()
-        {
-            return Tema.Valor - Tema.Valor * PorcentagemDesconto / 100;
-        }
 
         public void Concluir()
         {
@@ -69,18 +55,49 @@ namespace FestasInfantis.Dominio.ModuloAluguel
         {
             List<string> erros = new List<string>();
 
-            erros.AddRange(Festa.Validar());
+            if (Festa != null)
+                erros.AddRange(Festa.Validar());
 
             if (Cliente == null)
                 erros.Add("O campo 'Cliente' é obrigatório");
 
             if (Tema == null)
                 erros.Add("O campo 'Tema' é obrigatório");
-                
+
             if (PorcentagemSinal <= 0)
                 erros.Add("O campo '% do Sinal' é obrigatório");
 
             return erros.ToArray();
         }
+
+        public DadosPagamentoAluguel ObterDadosPagamento()
+        {
+            decimal percentualCliente = Cliente.CalcularDesconto(ConfiguracaoDesconto);
+
+            decimal valorTemaComDesconto = Tema.CalcularValorComDesconto(percentualCliente);
+
+            decimal valorSinal = valorTemaComDesconto - (valorTemaComDesconto * PorcentagemSinal / 100);
+
+            decimal valorPendente = valorTemaComDesconto - valorSinal;
+
+            DadosPagamentoAluguel dados = new DadosPagamentoAluguel();
+
+            dados.ValorComDesconto = valorTemaComDesconto;
+            dados.ValorPendente = valorPendente;
+            dados.ValorSinal = valorSinal;
+            dados.ValorPercentualCliente = percentualCliente;
+            dados.ValorTema = Tema.Valor;
+
+            return dados;
+        }
+    }
+
+    public class DadosPagamentoAluguel
+    {
+        public decimal ValorSinal;
+        public decimal ValorComDesconto;
+        public decimal ValorPendente;
+        public decimal ValorPercentualCliente;
+        public decimal ValorTema;
     }
 }

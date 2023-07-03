@@ -70,7 +70,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                     aluguel.Tema, 
                     aluguel.Festa.Data.ToShortDateString(), 
                     aluguel.Tema.Valor, 
-                    aluguel.CalcularValorPendente(),
+                    aluguel.ObterDadosPagamento().ValorPendente,
                     aluguel.PagamentoConcluido ? "Concluído" : "Pendente"
                 );
             }

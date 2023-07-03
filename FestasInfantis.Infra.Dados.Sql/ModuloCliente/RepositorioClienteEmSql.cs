@@ -77,6 +77,9 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
                 ,A.[ENDERECO_RUA]            ALUGUEL_ENDERECO_RUA
                 ,A.[ENDERECO_NUMERO]         ALUGUEL_ENDERECO_NUMERO
 
+                ,A.[CONFIGURACAO_PORCENTAGEMDESCONTO]       ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO
+                ,A.[CONFIGURACAO_PORCENTAGEMMAXIMA]         ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA
+
 	            ,A.[TEMA_ID]				 ALUGUEL_TEMA_ID
 	            ,A.[CLIENTE_ID]				 ALUGUEL_CLIENTE_ID
 
@@ -236,6 +239,8 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
                 pagamentoConcluido = Convert.ToBoolean(leitorAlugueis["ALUGUEL_PAGAMENTO_CONCLUIDO"]);
             }        
 
+            ConfiguracaoDesconto configuracaoDesconto = ConverterParaConfiguracaoDesconto(leitorAlugueis);
+
             Festa festa = ConverterParaFesta(leitorAlugueis);
 
             Tema tema = ConverterParaTema(leitorAlugueis);
@@ -248,6 +253,16 @@ namespace FestasInfantis.Infra.Dados.Sql.ModuloCliente
 
 
             return aluguel;
+        }
+
+        private static ConfiguracaoDesconto ConverterParaConfiguracaoDesconto(SqlDataReader leitorAlugueis)
+        {
+            decimal configuracaoPorcentagemDesconto = Convert.ToDecimal(leitorAlugueis["ALUGUEL_CONFIGURACAO_PORCENTAGEM_DESCONTO"]);
+            decimal configuracaoPorcentagemMaxima = Convert.ToDecimal(leitorAlugueis["ALUGUEL_CONFIGURACAO_PORCENTAGEM_MAXIMA"]);
+
+            ConfiguracaoDesconto configuracaoDesconto = new ConfiguracaoDesconto(configuracaoPorcentagemDesconto, configuracaoPorcentagemMaxima);
+
+            return configuracaoDesconto;
         }
 
         private static Festa ConverterParaFesta(SqlDataReader leitorAlugueis)

@@ -1,4 +1,5 @@
-﻿using FestasInfantis.Dominio.ModuloItem;
+﻿using FestasInfantis.Dominio.ModuloAluguel;
+using FestasInfantis.Dominio.ModuloItem;
 
 namespace FestasInfantis.Dominio.ModuloTema
 {
@@ -10,9 +11,11 @@ namespace FestasInfantis.Dominio.ModuloTema
         public decimal Valor { get; set; }
 
         public List<Item> Itens { get; set; }
+        public List<Aluguel> Alugueis { get; set; }
 
         public Tema()
         {
+            this.Alugueis = new List<Aluguel>();
             this.Itens = new List<Item>();
         }
 
@@ -34,10 +37,12 @@ namespace FestasInfantis.Dominio.ModuloTema
                 Itens.Add(item);
         }
 
-        public void CalcularValor()
+        public decimal CalcularValor()
         {
-            if (Itens != null)
-                Valor = Itens.Sum(x => x.valor);            
+            if (Itens != null && Itens.Count > 0)
+                Valor = Itens.Sum(x => x.valor);
+
+            return Valor;
         }
 
         public void AtualizarItens(List<Item> itens)
@@ -86,6 +91,18 @@ namespace FestasInfantis.Dominio.ModuloTema
                    id == tema.id &&
                    nome == tema.nome &&
                    Valor == tema.Valor;
+        }
+
+        internal decimal CalcularValorComDesconto(decimal percentual)
+        {
+            decimal valor = CalcularValor();
+
+            return valor - (valor * percentual / 100);
+        }
+
+        public void RegistrarAluguel(Aluguel aluguel)
+        {
+            Alugueis.Add(aluguel);
         }
     }
 }

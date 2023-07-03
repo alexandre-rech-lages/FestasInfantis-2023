@@ -24,6 +24,11 @@ namespace FestasInfantis.Infra.Dados.Arquivo.ModuleTema
             throw new NotImplementedException();
         }
 
+        public List<Tema> SelecionarTodos(bool carregarItens = false, bool carregarAlugueis = false)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override List<Tema> ObterRegistros()
         {
             return contextoDados.temas;

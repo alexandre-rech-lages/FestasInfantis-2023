@@ -93,19 +93,7 @@ namespace FestasInfantis.WinApp.ModuloTema
                     MessageBoxButtons.OK,
                 MessageBoxIcon.Exclamation);
                 return;
-            }
-
-            bool podeExcluir = repositorioAluguel.VerificarTemasIndisponiveis(tema);
-
-            if (!podeExcluir)
-            {
-                MessageBox.Show($"Não é possível excluir um tema utilizado em um aluguel em aberto.",
-                    "Exclusão de Temas",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-
-                return;
-            }
+            }           
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Tema {tema.nome}?", "Exclusão de Temas",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);

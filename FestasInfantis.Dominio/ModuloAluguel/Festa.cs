@@ -31,10 +31,18 @@
             if (Data < DateTime.Today)
                 erros.Add("A data da festa não pode ser no passado!");
 
-            if (HorarioTermino < HorarioInicio)
-                erros.Add("O horário de término não pode ser antes do início!");
+            if (HorarioInicio == TimeSpan.Zero)
+                erros.Add("O horário de início não pode ser 00:00!");
 
-            erros.AddRange(Endereco.Validar());
+            if (HorarioTermino == TimeSpan.Zero)
+                erros.Add("O horário de término não pode ser 00:00!");
+
+            if (HorarioTermino < HorarioInicio)
+                erros.Add("O horário de término não pode ser antes do início!");   
+            
+            if (Endereco != null)
+                erros.AddRange(Endereco.Validar());
+
 
             return erros.ToArray();
         }

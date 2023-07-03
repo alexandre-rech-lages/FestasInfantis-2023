@@ -42,7 +42,7 @@ namespace FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel
 
                 if (registrosJson.Length > 0)
                 {
-                    configuracaoDesconto = JsonSerializer.Deserialize<ConfiguracaoDesconto>(registrosJson, config)!;
+                    configuracaoDesconto = JsonSerializer.Deserialize<ConfiguracaoDesconto>(registrosJson, config);
                 }
             }
             else
@@ -56,7 +56,6 @@ namespace FestasInfantis.Infra.Dados.Arquivo.ModuloAluguel
             JsonSerializerOptions opcoes = new JsonSerializerOptions();
             opcoes.IncludeFields = true;
             opcoes.WriteIndented = true;
-            opcoes.ReferenceHandler = ReferenceHandler.Preserve;
 
             return opcoes;
         }
