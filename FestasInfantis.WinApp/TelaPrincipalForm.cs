@@ -23,6 +23,8 @@ namespace FestasInfantis.WinApp
     {
         private ControladorBase controlador;        
 
+        //corrigido o bug 01
+
         private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
 
         private IRepositorioCliente repositorioCliente = new RepositorioClienteEmSql();
