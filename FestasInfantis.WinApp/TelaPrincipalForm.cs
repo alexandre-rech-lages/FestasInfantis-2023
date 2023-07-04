@@ -21,9 +21,7 @@ namespace FestasInfantis.WinApp
 {
     public partial class TelaPrincipalForm : Form
     {
-        private ControladorBase controlador;
-
-        private static ContextoDados contextoDados = new ContextoDados(carregarDados: true);
+        private ControladorBase controlador;        
 
         private IRepositorioConfiguracaoDesconto repositorioDesconto = new RepositorioConfiguracaoEmArquivo(carregarDados: true);
 
